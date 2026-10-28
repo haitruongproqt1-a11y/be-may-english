@@ -1,9 +1,9 @@
 {
-  "version": "1.5.0",
-  "otaVersion": "1.5.0",
+  "version": "1.6.0",
+  "otaVersion": "1.6.0",
   "allowUpdate": true,
-  "title": "Bé Mây English v1.5.0 - AR & Voice Game Hub",
-  "notes": "✨ Phiên bản v1.5.0: Nâng cấp Trung Tâm Trò Chơi AR Đa Năng với 5 chế độ chơi chuẩn (Thẻ nổi 60s, Bong bóng bay, Hóa trang & Giả tiếng thú, Hộp quà bí mật, Phản xạ thần tốc), Thuật toán chống lặp Max-2 với 150+ từ vựng, Bộ máy tạo câu hỏi vô hạn và Cột sóng âm thanh Micro nhấp nháy!",
+  "title": "Bé Mây English v1.6.0 - 3D Living Graphics & Claymorphism",
+  "notes": "✨ Phiên bản v1.6.0: Nâng cấp toàn diện Đồ họa 3D Sống Động (Three.js/Canvas 3D Background bầu trời mây sao phản quang, nút bấm đồ chơi 3D Claymorphism, 4 Hòn Đảo Nổi 3D nhấp nhô có cột sáng & Bé Mây nhảy nhót, thẻ từ vựng lật xoay 3D 360°, Thẻ Hologram 3D và Hộp quà 3D mở nắp trong Camera AR)!",
   "bundleUrl": "https://raw.githubusercontent.com/haitruongproqt1-a11y/be-may-english/main/patch.js",
-  "updatedAt": "2026-10-28T22:10:00Z"
+  "updatedAt": "2026-10-28T22:30:00Z"
 }

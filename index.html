@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <style>
   * {
     font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
@@ -198,9 +199,261 @@
   .modal-backdrop { background: rgba(15, 23, 42, 0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
   input[type=range] { accent-color: #3B82F6; height: 32px; }
   select { user-select: auto; -webkit-user-select: auto; }
+
+  /* =====================================================================
+     3D CLAYMORPHISM & CSS 3D PERSPECTIVE STYLES
+     ===================================================================== */
+  :root {
+    --clay-border: 4px solid rgba(255, 255, 255, 0.9);
+    --clay-radius: 1.75rem;
+  }
+
+  /* 3D Toy-like Clay Buttons */
+  .clay-btn, .big-btn {
+    border-radius: var(--clay-radius) !important;
+    border: 3px solid rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 8px 0 var(--btn-shadow, rgba(14, 116, 144, 0.6)),
+                inset 0 4px 6px rgba(255, 255, 255, 0.8),
+                inset 0 -3px 5px rgba(0, 0, 0, 0.12),
+                0 14px 20px rgba(0, 0, 0, 0.15) !important;
+    transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease !important;
+    transform: translateY(0);
+    will-change: transform;
+  }
+  .clay-btn:active, .big-btn:active, .card-tap {
+    transform: translateY(6px) scale(0.96) !important;
+    box-shadow: 0 2px 0 var(--btn-shadow, rgba(14, 116, 144, 0.6)),
+                inset 0 2px 4px rgba(0, 0, 0, 0.25),
+                0 4px 8px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  /* 3D Clay Header */
+  #app-header {
+    background: rgba(255, 255, 255, 0.93) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 3.5px solid rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 8px 0 rgba(186, 230, 253, 0.75), 0 16px 28px rgba(2, 132, 199, 0.14) !important;
+  }
+
+  /* 3D Adventure Island Clusters */
+  .island-cluster-3d {
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    margin-bottom: 2rem;
+  }
+  .island-card-wrap {
+    border-radius: 2.25rem;
+    border: 4px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 14px 0 var(--island-shadow, #0284c7),
+                inset 0 5px 8px rgba(255, 255, 255, 0.85),
+                inset 0 -5px 8px rgba(0, 0, 0, 0.1),
+                0 22px 35px rgba(0, 0, 0, 0.18);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .island-card-wrap:hover {
+    transform: translateY(-4px);
+  }
+
+  /* 3D Gemstone Pedestal for Day Cards */
+  .gem-pedestal-3d {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+    cursor: pointer;
+    border-radius: 1.75rem;
+    border: 3.5px solid rgba(255, 255, 255, 0.92);
+    box-shadow: 0 10px 0 var(--pedestal-shadow, #38bdf8),
+                inset 0 4px 6px rgba(255, 255, 255, 0.85),
+                inset 0 -3px 5px rgba(0, 0, 0, 0.12),
+                0 16px 24px rgba(0, 0, 0, 0.14);
+    position: relative;
+    animation: island-bob 4s ease-in-out infinite;
+  }
+  .gem-pedestal-3d:active {
+    transform: translateY(7px) scale(0.95) !important;
+    box-shadow: 0 3px 0 var(--pedestal-shadow, #38bdf8),
+                inset 0 2px 4px rgba(0, 0, 0, 0.2),
+                0 6px 10px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Active Day 3D Beam of Light & Mascot Pin */
+  .active-day-pedestal {
+    border-color: #FACC15 !important;
+    box-shadow: 0 12px 0 #CA8A04,
+                0 0 25px rgba(250, 204, 21, 0.85),
+                inset 0 4px 6px rgba(255, 255, 255, 0.9) !important;
+  }
+  .active-day-pedestal::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 2.2rem;
+    border: 3px dashed rgba(250, 204, 21, 0.85);
+    animation: rotate-dashed 12s linear infinite;
+    pointer-events: none;
+  }
+  .beam-3d {
+    position: absolute;
+    bottom: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 90px;
+    background: linear-gradient(180deg, rgba(250, 204, 21, 0) 0%, rgba(250, 204, 21, 0.45) 100%);
+    clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
+    pointer-events: none;
+    animation: beam-pulse 2s ease-in-out infinite;
+  }
+  .mascot-3d-pin {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.3));
+    animation: mascot-hop 1.2s ease-in-out infinite;
+  }
+
+  /* 3D Flashcards with Flip & Tilt */
+  .flash-3d-scene {
+    perspective: 1200px;
+  }
+  .flash-3d-card {
+    transform-style: preserve-3d;
+    transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    border-radius: 2rem !important;
+    border: 4px solid rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 12px 0 var(--card-3d-shadow, #0284c7),
+                inset 0 4px 8px rgba(255, 255, 255, 0.9),
+                0 22px 30px rgba(0, 0, 0, 0.16) !important;
+    position: relative;
+    cursor: pointer;
+  }
+  .flash-3d-card.spin-3d {
+    transform: rotateY(360deg) rotateX(8deg) scale(1.08) !important;
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.9),
+                0 14px 0 var(--card-3d-shadow, #0284c7) !important;
+  }
+  .flash-3d-emoji {
+    transform: translateZ(48px);
+    filter: drop-shadow(0 16px 12px rgba(0, 0, 0, 0.25));
+    animation: float3d 2.8s ease-in-out infinite;
+    display: inline-block;
+  }
+  .flash-3d-en {
+    transform: translateZ(35px);
+  }
+  .flash-3d-vi {
+    transform: translateZ(25px);
+  }
+
+  /* 3D AR Hologram Card in Camera Overlay */
+  .hologram-3d-card {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    animation: pendulum-tilt 3.8s ease-in-out infinite;
+    border-radius: 2.25rem !important;
+    border: 5px solid rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 16px 0 rgba(2, 132, 199, 0.8),
+                0 0 35px rgba(56, 189, 248, 0.7),
+                inset 0 0 25px rgba(255, 255, 255, 0.45) !important;
+    position: relative;
+    overflow: hidden;
+  }
+  .hologram-3d-card::after {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.45) 50%, transparent 60%);
+    transform: rotate(25deg);
+    animation: spec-sweep 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .hologram-3d-card.fly-to-score-3d {
+    animation: fly-score-3d 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+  }
+
+  /* 3D Voice Ripple around Digital Clock */
+  .voice-ripple-3d {
+    position: absolute;
+    inset: -8px;
+    border-radius: 999px;
+    border: 3px solid rgba(74, 222, 128, 0.85);
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  .voice-ripple-3d.active {
+    animation: ripple-pulse 0.7s ease-out;
+  }
+
+  /* 3D Magic Mystery Box */
+  .mystery-box-3d {
+    perspective: 800px;
+    transform-style: preserve-3d;
+  }
+  .box-body-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .box-lid-3d {
+    transform-origin: top center;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .mystery-box-3d.opened .box-lid-3d {
+    transform: rotateX(-125deg) translateY(-10px);
+  }
+  .mystery-box-3d.opened .box-body-3d {
+    transform: scale(1.1);
+  }
+
+  /* Keyframe Animations */
+  @keyframes island-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes beam-pulse {
+    0%, 100% { opacity: 0.45; transform: translateX(-50%) scaleX(0.9); }
+    50% { opacity: 0.85; transform: translateX(-50%) scaleX(1.15); }
+  }
+  @keyframes mascot-hop {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px) scale(1.12); }
+  }
+  @keyframes float3d {
+    0%, 100% { transform: translateZ(48px) translateY(0) rotateZ(-2deg); }
+    50% { transform: translateZ(58px) translateY(-8px) rotateZ(3deg); }
+  }
+  @keyframes pendulum-tilt {
+    0%, 100% { transform: rotateY(-6deg) rotateX(4deg); }
+    50% { transform: rotateY(6deg) rotateX(-4deg); }
+  }
+  @keyframes spec-sweep {
+    0% { transform: translateX(-150%) rotate(25deg); }
+    100% { transform: translateX(150%) rotate(25deg); }
+  }
+  @keyframes rotate-dashed {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes ripple-pulse {
+    0% { transform: scale(0.9); opacity: 0.9; }
+    100% { transform: scale(1.45); opacity: 0; }
+  }
+  @keyframes fly-score-3d {
+    0% { transform: scale(1) rotateY(0); opacity: 1; }
+    50% { transform: scale(1.25) rotateY(360deg) translateY(-40px); opacity: 1; }
+    100% { transform: scale(0.2) rotateY(720deg) translateY(-280px) translateX(-100px); opacity: 0; }
+  }
+
 </style>
 </head>
-<body class="bg-gradient-to-b from-sky-100 via-blue-50 to-amber-50 min-h-screen pb-36 overflow-x-hidden text-slate-700">
+<body class="bg-gradient-to-b from-sky-100 via-blue-50 to-amber-50 min-h-screen pb-36 overflow-x-hidden text-slate-700 relative">
+<!-- ================= 3D INTERACTIVE WORLD BACKGROUND CANVAS ================= -->
+<canvas id="bg-3d-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
 <!-- ================= HEADER ================= -->
 <header id="app-header" class="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md shadow-md border-b border-sky-100">
@@ -238,7 +491,7 @@
 </header>
 
 <!-- ================= MAIN ================= -->
-<main id="main-content" class="max-w-5xl mx-auto px-3 sm:px-5 pt-20">
+<main id="main-content" class="max-w-5xl mx-auto px-3 sm:px-5 pt-20 relative z-10">
 
   <!-- ===== LEARNING PATH VIEW ===== -->
   <section id="view-path">
@@ -441,7 +694,7 @@
         <div class="sparkle-dot" style="top:-14px;left:-14px;"></div>
         <div class="sparkle-dot" style="top:20%;right:-20px;"></div>
         <div class="sparkle-dot" style="bottom:-12px;right:10%;"></div>
-        <div id="cam-classic-card" class="cam-card w-44 h-44 sm:w-52 sm:h-52 bg-white/95 rounded-3xl shadow-2xl border-4 border-sky-300 flex flex-col items-center justify-center p-3 text-center transform transition-all duration-300">
+        <div id="cam-classic-card" class="hologram-3d-card w-44 h-44 sm:w-52 sm:h-52 bg-gradient-to-br from-sky-400 via-sky-500 to-indigo-600 text-white rounded-3xl flex flex-col items-center justify-center p-3 text-center transform transition-all duration-300">
           <div id="cam-classic-emoji" class="emoji text-7xl sm:text-8xl drop-shadow mascot-bounce">🦁</div>
           <div id="cam-classic-en" class="text-2xl sm:text-3xl font-black text-sky-700 mt-1">Lion</div>
           <div id="cam-classic-vi" class="text-xs sm:text-sm font-extrabold text-slate-500">Sư tử</div>
@@ -484,9 +737,10 @@
     <!-- Game Mode 4: Magic Mystery Gift Box Stage -->
     <div id="cam-stage-giftbox" class="cam-game-stage hidden flex flex-col items-center pointer-events-auto">
       <div class="relative flex flex-col items-center">
-        <div id="cam-gift-box" class="w-48 h-48 rounded-3xl bg-gradient-to-br from-pink-500 to-rose-600 border-4 border-amber-300 shadow-2xl flex flex-col items-center justify-center p-3 text-white text-center cursor-pointer transition-transform duration-300">
-          <div id="cam-gift-emoji" class="emoji text-7xl mascot-bounce">🎁</div>
-          <div id="cam-gift-peek" class="text-xs font-black text-amber-200 mt-1">Đang rung rinh hé mở...</div>
+        <div id="cam-gift-box" class="mystery-box-3d w-48 h-48 rounded-3xl bg-gradient-to-br from-pink-500 to-rose-600 border-4 border-amber-300 shadow-2xl flex flex-col items-center justify-center p-3 text-white text-center cursor-pointer transition-transform duration-300">
+          <div class="box-lid-3d text-5xl mb-1">🎀</div>
+          <div id="cam-gift-emoji" class="emoji text-6xl mascot-bounce">🎁</div>
+          <div id="cam-gift-peek" class="text-xs font-black text-amber-200 mt-1">Hộp 3D đang rung lắc hé mở...</div>
         </div>
         <div id="cam-gift-word-box" class="mt-3 bg-white/95 rounded-2xl px-4 py-2 shadow-xl text-center">
           <div class="text-xs font-bold text-slate-500">Câu thần chú mở hộp:</div>
@@ -527,8 +781,9 @@
   <div class="absolute bottom-0 inset-x-0 px-3 pb-3 pt-2 flex flex-col items-center gap-2 z-30 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
     <div class="flex items-center justify-center gap-3 w-full max-w-md">
       
-      <!-- Digital Green Clock -->
-      <div class="flex items-center bg-slate-900/90 border-2 border-emerald-400 rounded-2xl px-3 py-1.5 shadow-lg">
+      <!-- Digital Green Clock with 3D Voice Ripple -->
+      <div class="relative flex items-center bg-slate-900/90 border-2 border-emerald-400 rounded-2xl px-3 py-1.5 shadow-lg">
+        <div id="cam-voice-ripple" class="voice-ripple-3d"></div>
         <span class="emoji text-xl mr-1.5">⏱️</span>
         <span id="cam-digital-timer" class="font-mono-digital text-2xl sm:text-3xl text-emerald-400 font-bold tracking-wider">60.00s</span>
       </div>
@@ -1352,27 +1607,59 @@ function renderDayCards() {
   grid.innerHTML = '';
   const filtered = state.weekFilter === 0 ? lessonsData : lessonsData.filter(l => l.week === state.weekFilter);
   let lastWeek = 0;
+
+  // Determine current active study day (first uncompleted day)
+  const currentActiveDay = lessonsData.find(l => !state.completedDays.includes(l.day)) ?
+                           lessonsData.find(l => !state.completedDays.includes(l.day)).day : 1;
+
   filtered.forEach((lesson, idx) => {
     if (lesson.week !== lastWeek) {
       lastWeek = lesson.week;
+      const islandNames = {
+        1: { title: "Đảo 1: Chào Hỏi & Cơ Thể", icon: "🏝️", shadow: "#0284c7" },
+        2: { title: "Đảo 2: Sắc Màu & Đồ Ăn", icon: "🌈", shadow: "#db2777" },
+        3: { title: "Đảo 3: Rừng Xanh Động Vật", icon: "🌴", shadow: "#059669" },
+        4: { title: "Đảo 4: Gia Đình & Thiên Nhiên", icon: "✨", shadow: "#7c3aed" }
+      };
+      const info = islandNames[lesson.week] || { title: `Đảo Tuần ${lesson.week}`, icon: "🏝️", shadow: "#0284c7" };
+
       const head = document.createElement('div');
-      head.className = `col-span-full bg-gradient-to-r ${weekThemes[lesson.week].color} text-white rounded-3xl px-4 py-2 font-black text-lg shadow-md flex items-center gap-2 mt-2`;
-      head.innerHTML = `<span class="emoji text-2xl">🏝️</span> Đảo Tuần ${lesson.week}: ${weekThemes[lesson.week].name}`;
+      head.className = `col-span-full island-card-wrap bg-gradient-to-r ${weekThemes[lesson.week].color} text-white px-5 py-3 font-black text-lg shadow-xl flex items-center justify-between mt-4 mb-2`;
+      head.style.setProperty('--island-shadow', info.shadow);
+      head.innerHTML = `
+        <div class="flex items-center gap-2">
+          <span class="emoji text-3xl mascot-bounce">${info.icon}</span>
+          <div>
+            <div class="text-base sm:text-lg font-black">${info.title}</div>
+            <div class="text-xs text-white/80 font-bold">${weekThemes[lesson.week].name}</div>
+          </div>
+        </div>
+        <span class="bg-white/30 backdrop-blur-sm text-xs font-black px-3 py-1 rounded-full shadow">Tuần ${lesson.week}</span>
+      `;
       grid.appendChild(head);
     }
+
     const done = state.completedDays.includes(lesson.day);
+    const isActiveDay = (lesson.day === currentActiveDay);
+
     const card = document.createElement('div');
-    card.className = `day-card bounce-in relative rounded-3xl p-3 shadow-lg text-center border-4 ${done ? 'border-green-400' : 'border-white'}`;
+    card.className = `gem-pedestal-3d bounce-in relative p-3 text-center ${isActiveDay ? 'active-day-pedestal' : ''}`;
     card.style.background = pastelPalette[(lesson.day - 1) % pastelPalette.length];
     card.style.animationDelay = Math.min(idx * 0.03, 0.6) + 's';
+
+    const shadows = ['#f59e0b', '#0284c7', '#db2777', '#059669', '#7c3aed', '#e11d48', '#0891b2'];
+    card.style.setProperty('--pedestal-shadow', shadows[(lesson.day - 1) % shadows.length]);
+
     card.innerHTML = `
-      ${done ? '<div class="absolute -top-3 -right-3 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md emoji text-2xl">✅</div>' : ''}
-      <div class="text-xs font-black text-slate-500 uppercase tracking-wide">Day ${lesson.day}</div>
-      <div class="emoji text-6xl my-2">${lesson.words[0].emoji}</div>
-      <div class="font-black text-slate-700 leading-tight text-sm min-h-[2.5rem] flex items-center justify-center">${lesson.title}</div>
-      <div class="text-xs font-bold text-slate-500 mt-1 truncate">${lesson.words.map(w => w.en).join(' • ')}</div>
-      <div class="mt-2 emoji text-lg">${done ? '⭐⭐⭐' : '<span class="opacity-30">⭐⭐⭐</span>'}</div>
+      ${isActiveDay ? '<div class="beam-3d"></div><div class="mascot-3d-pin emoji text-3xl">👧</div>' : ''}
+      ${done ? '<div class="absolute -top-3 -right-3 bg-white rounded-full w-9 h-9 flex items-center justify-center shadow-lg emoji text-xl border-2 border-emerald-400">👑</div>' : ''}
+      <div class="text-[11px] font-black text-slate-600 uppercase tracking-wider">Day ${lesson.day}</div>
+      <div class="emoji text-5xl sm:text-6xl my-1.5 mascot-bounce drop-shadow-[0_8px_6px_rgba(0,0,0,0.18)]">${lesson.words[0].emoji}</div>
+      <div class="font-black text-slate-800 leading-tight text-xs sm:text-sm min-h-[2.2rem] flex items-center justify-center">${lesson.title}</div>
+      <div class="text-[10px] font-bold text-slate-500 mt-0.5 truncate">${lesson.words.map(w => w.en).join(' • ')}</div>
+      <div class="mt-1.5 emoji text-base">${done ? '⭐⭐⭐' : '<span class="opacity-30">⭐⭐⭐</span>'}</div>
     `;
+
     card.addEventListener('click', () => { playPop(); openLesson(lesson.day); });
     grid.appendChild(card);
   });
@@ -1455,46 +1742,67 @@ function renderStepContent() {
   }
 }
 
-/* ---------- BƯỚC 1: THẺ TỪ ---------- */
+/* ---------- BƯỚC 1: THẺ TỪ (3D FLIP & TILT FLASHCARDS) ---------- */
 function renderStep1_Flashcards(lesson, c) {
   c.innerHTML = `
-    <div class="bg-white/80 rounded-3xl p-4 mb-4 shadow text-center slide-up">
-      <div class="font-black text-xl text-sky-700">🎴 Chạm vào thẻ để nghe Bé Mây đọc nhé!</div>
-      <div class="text-sm font-semibold text-slate-500">Mỗi lần chạm Bé Mây sẽ đọc đúng 1 lần từ vựng tiếng Anh chuẩn cho bé</div>
+    <div class="clay-card bg-white/95 rounded-3xl p-4 mb-5 shadow-xl text-center slide-up border-4 border-white">
+      <div class="font-black text-xl text-sky-700 flex items-center justify-center gap-2">
+        <span class="emoji text-3xl mascot-bounce">🎴</span> Thẻ Từ Vựng 3D Nổi Khối
+      </div>
+      <div class="text-xs sm:text-sm font-extrabold text-slate-500 mt-1">Bé chạm vào thẻ để xoay lật 3D 360° và nghe phát âm chuẩn tiếng Anh</div>
     </div>
-    <div id="flash-grid" class="word-grid"></div>`;
+    <div id="flash-grid" class="flash-3d-scene grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5"></div>`;
   const grid = c.querySelector('#flash-grid');
   lesson.words.forEach((w, i) => {
     const card = document.createElement('div');
-    card.className = 'big-btn bounce-in rounded-3xl p-4 shadow-lg text-center border-4 border-white cursor-pointer';
+    card.className = 'flash-3d-card p-5 text-center cursor-pointer select-none';
     card.style.background = w.bg;
     card.style.animationDelay = i * 0.08 + 's';
+    const cardShadows = ['#f59e0b', '#0284c7', '#db2777', '#059669', '#7c3aed'];
+    card.style.setProperty('--card-3d-shadow', cardShadows[i % cardShadows.length]);
+
     card.innerHTML = `
-      <div class="emoji text-8xl my-2 drop-shadow">${w.emoji}</div>
-      <div class="fc-en text-3xl font-black text-slate-800">${w.en}</div>
-      <div class="fc-vi text-base font-bold text-slate-500">${w.vi}</div>
-      <div class="mt-2 inline-flex items-center gap-1 bg-white/70 rounded-full px-3 py-1 text-sm font-bold text-sky-600"><span class="emoji">🔊</span> Nghe 1 lần</div>`;
-    let toggled = false;
+      <div class="flash-3d-emoji emoji text-8xl my-3">${w.emoji}</div>
+      <div class="flash-3d-en fc-en text-3xl font-black text-slate-800 tracking-tight">${w.en}</div>
+      <div class="flash-3d-vi fc-vi text-base font-extrabold text-slate-500 mt-0.5">${w.vi}</div>
+      <div class="mt-4 inline-flex items-center gap-1.5 bg-white/85 rounded-full px-4 py-1.5 text-xs font-black text-sky-700 shadow-md border border-white">
+        <span class="emoji text-base">🔊</span> Nghe phát âm 3D
+      </div>`;
+
+    let spinning = false;
     card.addEventListener('click', () => {
       playPop();
-      animate(card, 'card-tap');
-      showConfetti('light');
-      toggled = !toggled;
-      if (lesson.week === 2 && w.tint) {
-        card.style.background = toggled ? w.tint : w.bg;
-        card.querySelector('.fc-en').style.color = toggled ? '#fff' : '';
-        card.querySelector('.fc-vi').style.color = toggled ? 'rgba(255,255,255,0.9)' : '';
-      } else {
-        card.style.background = toggled ? pastelPalette[(i + 3) % pastelPalette.length] : w.bg;
+      if (!spinning) {
+        spinning = true;
+        card.classList.add('spin-3d');
+        showConfetti('light');
+        setTimeout(() => {
+          card.classList.remove('spin-3d');
+          spinning = false;
+        }, 700);
       }
       setMascot(w.en, `${w.en} nghĩa là "${w.vi}".`);
       if (window.speechSynthesis) window.speechSynthesis.cancel();
       speak(w.en);
     });
+
+    // 3D Tilt interaction on move
+    card.addEventListener('pointermove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      const rotX = -(y / (rect.height / 2)) * 12;
+      const rotY = (x / (rect.width / 2)) * 14;
+      card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+    });
+    card.addEventListener('pointerleave', () => {
+      card.style.transform = '';
+    });
+
     grid.appendChild(card);
   });
   c.appendChild(nextStepButton());
-  setMascot("Let's look at our new words!", `Hôm nay mình học ${lesson.words.length} từ mới. Chạm vào thẻ để nghe đọc 1 lần nhé!`, false);
+  setMascot("Let's look at our new words!", `Hôm nay mình học ${lesson.words.length} từ mới. Chạm vào thẻ để nghe đọc nhé!`, false);
 }
 
 /* ---------- BƯỚC 2: CHẠM HÌNH ---------- */
@@ -2041,6 +2349,254 @@ function saveAdminSettings() {
   alert("✅ Đã lưu cấu hình Admin thành công!");
 }
 
+
+
+/* =====================================================================
+   THREE.JS 3D WORLD BACKGROUND (MÂY 3D, CẦU VỒNG 3D, SAO 3D & BONG BÓNG)
+   ===================================================================== */
+const ThreeWorld = {
+  scene: null,
+  camera: null,
+  renderer: null,
+  canvas: null,
+  stars: [],
+  bubbles: [],
+  clouds: [],
+  isRunning: false,
+  mouse: { x: 0, y: 0, targetX: 0, targetY: 0 },
+
+  init() {
+    this.canvas = document.getElementById('bg-3d-canvas');
+    if (!this.canvas) return;
+
+    // Check if THREE is available
+    if (typeof THREE === 'undefined') {
+      this.initFallbackCanvas();
+      return;
+    }
+
+    try {
+      this.scene = new THREE.Scene();
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      this.camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+      this.camera.position.z = 25;
+
+      this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, alpha: true, antialias: true });
+      this.renderer.setSize(width, height);
+      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Lighting
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+      this.scene.add(ambientLight);
+
+      const dirLight = new THREE.DirectionalLight(0xffedd5, 1.2);
+      dirLight.position.set(10, 20, 15);
+      this.scene.add(dirLight);
+
+      // Create 3D Objects
+      this.createStars();
+      this.createClouds();
+      this.createBubbles();
+      this.createRainbow();
+
+      window.addEventListener('resize', () => this.onResize());
+      window.addEventListener('pointermove', (e) => this.onPointerMove(e));
+
+      this.isRunning = true;
+      this.animate();
+    } catch (e) {
+      console.warn("WebGL not supported, falling back to 2D canvas", e);
+      this.initFallbackCanvas();
+    }
+  },
+
+  createStars() {
+    const starGeom = new THREE.DodecahedronGeometry(0.7, 0);
+    const starMat = new THREE.MeshStandardMaterial({
+      color: 0xFACC15,
+      metalness: 0.3,
+      roughness: 0.2,
+      emissive: 0x713F12
+    });
+
+    for (let i = 0; i < 18; i++) {
+      const mesh = new THREE.Mesh(starGeom, starMat);
+      mesh.position.set(
+        (Math.random() - 0.5) * 35,
+        (Math.random() - 0.5) * 30,
+        (Math.random() - 0.5) * 15 - 5
+      );
+      mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+      mesh.scale.setScalar(0.6 + Math.random() * 0.8);
+      mesh.userData = {
+        rotSpeedX: 0.01 + Math.random() * 0.02,
+        rotSpeedY: 0.015 + Math.random() * 0.02,
+        floatSpeed: 0.005 + Math.random() * 0.01,
+        startY: mesh.position.y
+      };
+      this.scene.add(mesh);
+      this.stars.push(mesh);
+    }
+  },
+
+  createClouds() {
+    const cloudMat = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      roughness: 0.8,
+      metalness: 0.1
+    });
+
+    for (let c = 0; c < 5; c++) {
+      const group = new THREE.Group();
+      const numPuffs = 5 + Math.floor(Math.random() * 4);
+      for (let p = 0; p < numPuffs; p++) {
+        const radius = 1.2 + Math.random() * 1.5;
+        const geom = new THREE.SphereGeometry(radius, 14, 14);
+        const puff = new THREE.Mesh(geom, cloudMat);
+        puff.position.set(p * 1.2 - 2, (Math.random() - 0.5) * 0.8, (Math.random() - 0.5) * 0.8);
+        group.add(puff);
+      }
+      group.position.set(
+        (Math.random() - 0.5) * 40,
+        6 + Math.random() * 10,
+        -8 - Math.random() * 10
+      );
+      group.scale.setScalar(0.7 + Math.random() * 0.5);
+      group.userData = { speed: 0.008 + Math.random() * 0.012 };
+      this.scene.add(group);
+      this.clouds.push(group);
+    }
+  },
+
+  createBubbles() {
+    const bubbleGeom = new THREE.SphereGeometry(0.8, 16, 16);
+    const bubbleMat = new THREE.MeshPhysicalMaterial({
+      color: 0x38BDF8,
+      metalness: 0.1,
+      roughness: 0.1,
+      transmission: 0.85,
+      transparent: true,
+      opacity: 0.65,
+      ior: 1.33
+    });
+
+    for (let i = 0; i < 12; i++) {
+      const bubble = new THREE.Mesh(bubbleGeom, bubbleMat);
+      bubble.position.set(
+        (Math.random() - 0.5) * 30,
+        -15 + Math.random() * 30,
+        (Math.random() - 0.5) * 12
+      );
+      bubble.scale.setScalar(0.5 + Math.random() * 0.8);
+      bubble.userData = {
+        speedY: 0.015 + Math.random() * 0.025,
+        wobbleSpeed: 0.02 + Math.random() * 0.03,
+        seed: Math.random() * 100
+      };
+      this.scene.add(bubble);
+      this.bubbles.push(bubble);
+    }
+  },
+
+  createRainbow() {
+    const curve = new THREE.QuadraticBezierCurve3(
+      new THREE.Vector3(-18, -4, -12),
+      new THREE.Vector3(0, 16, -12),
+      new THREE.Vector3(18, -4, -12)
+    );
+    const geom = new THREE.TubeGeometry(curve, 32, 0.45, 8, false);
+    const mat = new THREE.MeshBasicMaterial({ color: 0xF472B6, transparent: true, opacity: 0.4 });
+    const rainbowMesh = new THREE.Mesh(geom, mat);
+    this.scene.add(rainbowMesh);
+  },
+
+  onResize() {
+    if (!this.camera || !this.renderer) return;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    this.camera.aspect = w / h;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(w, h);
+  },
+
+  onPointerMove(e) {
+    this.mouse.targetX = (e.clientX / window.innerWidth - 0.5) * 2;
+    this.mouse.targetY = -(e.clientY / window.innerHeight - 0.5) * 2;
+  },
+
+  animate() {
+    if (!this.isRunning) return;
+    requestAnimationFrame(() => this.animate());
+
+    // Gentle camera sway
+    this.mouse.x += (this.mouse.targetX - this.mouse.x) * 0.05;
+    this.mouse.y += (this.mouse.targetY - this.mouse.y) * 0.05;
+    this.camera.position.x = this.mouse.x * 2;
+    this.camera.position.y = this.mouse.y * 1.5;
+    this.camera.lookAt(0, 0, 0);
+
+    const now = Date.now() * 0.001;
+
+    // Rotate and bob stars
+    this.stars.forEach(s => {
+      s.rotation.x += s.userData.rotSpeedX;
+      s.rotation.y += s.userData.rotSpeedY;
+      s.position.y = s.userData.startY + Math.sin(now * 2 + s.position.x) * 0.8;
+    });
+
+    // Move clouds
+    this.clouds.forEach(c => {
+      c.position.x += c.userData.speed;
+      if (c.position.x > 25) c.position.x = -25;
+    });
+
+    // Rise bubbles
+    this.bubbles.forEach(b => {
+      b.position.y += b.userData.speedY;
+      b.position.x += Math.sin(now + b.userData.seed) * 0.015;
+      if (b.position.y > 18) {
+        b.position.y = -18;
+        b.position.x = (Math.random() - 0.5) * 30;
+      }
+    });
+
+    this.renderer.render(this.scene, this.camera);
+  },
+
+  initFallbackCanvas() {
+    const ctx = this.canvas.getContext('2d');
+    const resize = () => {
+      this.canvas.width = window.innerWidth;
+      this.canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const stars = Array.from({ length: 25 }, () => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      size: 2 + Math.random() * 4,
+      speed: 0.02 + Math.random() * 0.04
+    }));
+
+    const draw = () => {
+      ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      const time = Date.now() * 0.002;
+      ctx.fillStyle = '#FACC15';
+      stars.forEach(s => {
+        const alpha = 0.3 + Math.sin(time + s.x) * 0.35;
+        ctx.globalAlpha = Math.max(0, alpha);
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    };
+    draw();
+  }
+};
 
 /* =====================================================================
    KHO TỪ VỰNG MỞ RỘNG MẦM NON (150+ TỪ VỰNG CHUẨN)
@@ -2915,11 +3471,30 @@ const ARGameHub = {
     const praise = DynamicPromptEngine.getPraise(this.currentWord);
     this.updateSpeechToast(`✅ ${isParentPass ? 'Bố Mẹ duyệt: ' : ''}${this.currentWord.en} - ${praise}`);
 
+    // Trigger 3D Hologram Fly-to-score effect
+    const cCard = document.getElementById('cam-classic-card');
+    if (cCard && this.activeMode === 'classic') {
+      cCard.classList.add('fly-to-score-3d');
+      setTimeout(() => cCard.classList.remove('fly-to-score-3d'), 850);
+    }
+
+    // Trigger 3D Voice Ripple pulse
+    const ripple = document.getElementById('cam-voice-ripple');
+    if (ripple) {
+      ripple.classList.remove('active');
+      void ripple.offsetWidth;
+      ripple.classList.add('active');
+    }
+
+    // Trigger 3D Mystery Box lid opening
     if (this.activeMode === 'giftbox') {
       const gBox = document.getElementById('cam-gift-box');
       const gEmoji = document.getElementById('cam-gift-emoji');
       if (gEmoji) gEmoji.textContent = this.currentWord.emoji;
-      if (gBox) gBox.classList.add('scale-110');
+      if (gBox) {
+        gBox.classList.add('opened');
+        setTimeout(() => gBox.classList.remove('opened'), 1000);
+      }
     }
 
     setTimeout(() => {
@@ -2971,6 +3546,7 @@ const ARGameHub = {
 
 function init() {
   OTAEngine.loadCachedBundle();
+  ThreeWorld.init();
   ARGameHub.init();
   loadState();
   initVoices();
