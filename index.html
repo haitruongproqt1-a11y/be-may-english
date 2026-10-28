@@ -203,33 +203,35 @@
 <body class="bg-gradient-to-b from-sky-100 via-blue-50 to-amber-50 min-h-screen pb-36 overflow-x-hidden text-slate-700">
 
 <!-- ================= HEADER ================= -->
-<header id="app-header" class="fixed top-0 inset-x-0 z-50 bg-white/85 backdrop-blur-md shadow-md">
-  <div class="max-w-5xl mx-auto flex items-center justify-between gap-2 px-3 py-2">
-    <button id="btn-logo" class="flex items-center gap-1 big-btn">
-      <span class="emoji text-3xl">👧</span>
-      <span class="text-lg sm:text-2xl font-black text-sky-600 leading-tight">Bé Mây <span class="text-pink-500">English</span></span>
+<header id="app-header" class="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md shadow-md border-b border-sky-100">
+  <div class="max-w-5xl mx-auto flex items-center justify-between gap-1 px-2 sm:px-4 py-2">
+    <!-- Left: Brand Logo -->
+    <button id="btn-logo" class="flex items-center gap-1.5 big-btn shrink-0">
+      <span class="emoji text-2xl sm:text-3xl mascot-bounce">👧</span>
+      <span class="text-sm sm:text-lg font-black text-sky-600 tracking-tight">Bé Mây <span class="hidden sm:inline text-pink-500">English</span></span>
     </button>
-    <div class="flex items-center gap-1.5 sm:gap-2">
-      <button id="btn-header-admin" class="big-btn bg-slate-800 text-amber-300 font-extrabold rounded-full px-2.5 sm:px-3 py-2 text-xs sm:text-sm shadow-md flex items-center gap-1 border border-amber-400/50">
-        <span class="emoji text-base">🛠️</span><span class="hidden sm:inline">Admin</span><span class="sm:hidden text-[10px]">OTA</span>
+
+    <!-- Right Controls: Designed specifically for mobile screens, NEVER cut off! -->
+    <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
+      <button id="btn-open-cam-global" class="big-btn bg-gradient-to-r from-sky-400 to-indigo-500 text-white font-extrabold rounded-full px-2 sm:px-3 py-1.5 text-xs shadow-md flex items-center gap-1 shrink-0" title="Camera AR">
+        <span class="emoji text-sm sm:text-base">📸</span><span class="hidden md:inline">Camera AR</span>
       </button>
-      <button id="btn-header-ota" class="big-btn bg-emerald-100 text-emerald-700 font-extrabold rounded-full px-2.5 sm:px-3 py-2 text-xs sm:text-sm shadow-sm flex items-center gap-1">
-        <span class="emoji text-base">🔄</span><span class="hidden sm:inline">Cập Nhật</span>
-      </button>
-      <button id="btn-open-cam-global" class="big-btn bg-gradient-to-r from-sky-400 to-indigo-500 text-white font-extrabold rounded-full px-2.5 sm:px-3 py-2 text-xs sm:text-sm shadow-md flex items-center gap-1">
-        <span class="emoji text-lg">📸</span><span class="hidden sm:inline">Sân Chơi AR</span>
-      </button>
-      <button id="btn-open-stickers" class="big-btn bg-pink-100 text-pink-600 font-extrabold rounded-full px-3 py-2 text-sm shadow-sm flex items-center gap-1">
-        <span class="hidden sm:inline">Sổ Sticker</span><span class="emoji text-lg">🎁</span>
-      </button>
-      <div class="bg-amber-100 text-amber-600 font-black rounded-full px-3 py-2 text-base flex items-center gap-1 shadow-sm">
-        <span class="emoji text-lg">⭐</span><span id="star-count">0</span>
+
+      <div class="bg-amber-100 text-amber-700 font-black rounded-full px-2 py-1 text-xs flex items-center gap-1 shadow-sm shrink-0">
+        <span class="emoji text-xs sm:text-sm">⭐</span><span id="star-count">0</span>
       </div>
-      <button id="btn-quick-speed" class="big-btn bg-sky-100 text-sky-800 font-black rounded-full px-2.5 py-2 text-xs shadow-sm flex items-center gap-1 border border-sky-300" title="Đổi tốc độ đọc">
-        <span>🐢</span><span id="quick-speed-label">0.72x</span>
+
+      <button id="btn-quick-speed" class="big-btn bg-sky-100 text-sky-800 font-black rounded-full px-2 py-1 text-xs shadow-sm flex items-center gap-1 border border-sky-300 shrink-0" title="Tốc độ đọc">
+        <span>🐢</span><span id="quick-speed-label" class="hidden sm:inline">0.72x</span>
       </button>
-      <button id="btn-open-settings" class="big-btn bg-slate-100 rounded-full w-11 h-11 flex items-center justify-center shadow-sm" aria-label="Cài đặt Phụ huynh">
-        <span class="emoji text-xl">⚙️</span>
+
+      <button id="btn-header-ota" class="big-btn bg-emerald-100 text-emerald-800 font-extrabold rounded-full px-2 py-1 text-xs shadow-sm flex items-center gap-1 shrink-0" title="Kiểm tra Cập nhật">
+        <span class="emoji text-xs sm:text-sm">🔄</span><span class="hidden md:inline">Cập Nhật</span>
+      </button>
+
+      <!-- NÚT CÀI ĐẶT: LUÔN HIỂN THỊ CỐ ĐỊNH, SHRINK-0, KHÔNG BAO GIỜ BỊ CHE TRÊN MOBILE -->
+      <button id="btn-open-settings" class="big-btn bg-slate-100 hover:bg-slate-200 rounded-full w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center shadow-sm shrink-0 border border-slate-300 ml-0.5" aria-label="Cài đặt Phụ huynh" title="Cài đặt">
+        <span class="emoji text-base sm:text-lg">⚙️</span>
       </button>
     </div>
   </div>
@@ -361,14 +363,14 @@
   <canvas id="cam-ar-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-[11]"></canvas>
 
   <!-- Top HUD -->
-  <div class="absolute top-0 inset-x-0 px-3 pt-3 flex items-center gap-2 z-20">
-    <button id="cam-back-btn" class="big-btn w-12 h-12 rounded-full bg-white/90 text-2xl font-black text-rose-500 shadow-lg shrink-0">⬅</button>
-    <button id="cam-game-select-btn" class="big-btn shrink-0 bg-gradient-to-r from-amber-400 to-orange-400 text-white font-black text-xs sm:text-sm rounded-full px-3 py-2.5 shadow-lg flex items-center gap-1.5 border-2 border-white">
-      <span class="emoji text-xl">🎮</span> <span>Đổi Trò Chơi</span>
+  <div class="absolute top-0 inset-x-0 px-2.5 pt-2.5 flex items-center gap-1.5 z-30">
+    <button id="cam-back-btn" class="big-btn w-10 h-10 rounded-full bg-white/90 text-xl font-black text-rose-500 shadow-lg shrink-0 flex items-center justify-center">⬅</button>
+    <button id="cam-game-select-btn" class="big-btn shrink-0 bg-gradient-to-r from-amber-400 to-orange-400 text-white font-black text-xs rounded-full px-2.5 py-2 shadow-lg flex items-center gap-1 border-2 border-white">
+      <span class="emoji text-base">🎮</span> <span>Đổi Trò Chơi</span>
     </button>
     <div id="cam-classic-progress" class="flex-1 relative flex items-center">
-      <div id="cam-current-num" class="coin-badge absolute -left-2 z-10 w-12 h-12 rounded-full flex items-center justify-center font-black text-xl">1</div>
-      <div class="progress-track flex-1 ml-6">
+      <div id="cam-current-num" class="coin-badge absolute -left-2 z-10 w-9 h-9 rounded-full flex items-center justify-center font-black text-base">1</div>
+      <div class="progress-track flex-1 ml-5">
         <div id="cam-progress-fill" class="progress-fill" style="width:0%"></div>
         <div class="absolute top-0 bottom-0" style="left:33.33%;border-left:2px dashed rgba(255,255,255,0.9)"></div>
         <div class="absolute top-0 bottom-0" style="left:66.66%;border-left:2px dashed rgba(255,255,255,0.9)"></div>
@@ -377,16 +379,37 @@
         <span class="absolute -bottom-6 text-xs font-black text-white drop-shadow" style="right:0;transform:translateX(30%)">15</span>
       </div>
     </div>
-    <div id="cam-active-game-title" class="hidden flex-1 text-center font-black text-white text-base sm:text-lg drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] truncate">
+    <div id="cam-active-game-title" class="hidden flex-1 text-center font-black text-white text-sm sm:text-base drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] truncate">
       Gương Biến Hình
     </div>
-    <button id="cam-mode-toggle" class="big-btn shrink-0 bg-white/90 text-indigo-600 font-black text-xs sm:text-sm rounded-full px-3 py-2 shadow-lg">📅 Từ Ngày</button>
+    <button id="cam-mode-toggle" class="big-btn shrink-0 bg-white/90 text-indigo-600 font-black text-xs rounded-full px-2 py-1.5 shadow-lg">📅 Từ Ngày</button>
+    <!-- Nút Cài Đặt Trực Tiếp Trong Camera AR -->
+    <button id="cam-settings-btn" class="big-btn shrink-0 w-9 h-9 rounded-full bg-white/90 text-slate-700 shadow-lg flex items-center justify-center font-black text-base border border-slate-200 ml-0.5" aria-label="Cài đặt" title="Cài đặt">⚙️</button>
   </div>
   <div id="cam-ar-hud" class="hidden pointer-events-none"></div>
   <div id="cam-score-pill" class="absolute top-20 left-1/2 -translate-x-1/2 z-10 bg-white/85 rounded-full px-4 py-1 font-black text-emerald-600 shadow">✅ Đúng: <span id="cam-score">0</span></div>
 
+  <!-- Top Live Mic Status Indicator (Always Visible at top-13, z-40) -->
+  <div id="cam-mic-bar" class="absolute top-13 inset-x-0 flex items-center justify-center pointer-events-none z-40 px-3">
+    <div id="cam-mic-status" class="bg-slate-900/90 backdrop-blur-md text-white text-xs sm:text-sm font-extrabold rounded-full px-4 py-1.5 shadow-xl border border-sky-400/40 flex items-center gap-2 max-w-[95%] truncate">
+      <span id="cam-mic-icon" class="text-base animate-pulse">🎤</span>
+      <span id="cam-mic-label">Bé Mây đang lắng nghe giọng bé đọc...</span>
+    </div>
+  </div>
+
+  <!-- Floating Live Spoken Bubble (Always Prominent at top-23, z-50) -->
+  <div id="cam-speech-bubble-wrap" class="absolute top-23 inset-x-0 flex items-center justify-center pointer-events-none z-50 px-3">
+    <div id="cam-speech-bubble" class="bg-gradient-to-r from-amber-400 via-pink-500 to-sky-500 p-0.5 rounded-full shadow-2xl transition-all duration-200 hidden">
+      <div class="bg-slate-900/95 backdrop-blur-md px-5 py-2 rounded-full flex items-center gap-2">
+        <span class="text-xl animate-bounce">🗣️</span>
+        <span class="text-xs sm:text-sm font-black text-amber-300">Bé vừa đọc:</span>
+        <span id="cam-speech-text" class="text-sm sm:text-base font-black text-white underline decoration-amber-400 decoration-2">"..."</span>
+      </div>
+    </div>
+  </div>
+
   <!-- Center floating card -->
-  <div class="absolute inset-x-0 top-24 sm:top-28 flex flex-col items-center z-10 px-4">
+  <div class="absolute inset-x-0 top-32 flex flex-col items-center z-10 px-4">
     <div id="cam-classic-box" class="flex flex-col items-center">
       <div class="relative">
         <div class="sparkle-dot" style="top:-14px;left:-14px;animation-delay:0s"></div>
@@ -410,9 +433,8 @@
   </div>
 
   <!-- Bottom -->
-  <div class="absolute bottom-0 inset-x-0 px-3 pb-4 flex flex-col items-center gap-3 z-10">
-    <div id="cam-mic-status" class="bg-black/55 text-white text-sm font-bold rounded-full px-4 py-1.5 max-w-[90%] truncate">🎤 Đang chuẩn bị micro...</div>
-    <div id="cam-timer-box" class="flex items-center">
+  <div class="absolute bottom-0 inset-x-0 px-3 pb-4 flex flex-col items-center gap-3 z-10 pointer-events-none">
+    <div id="cam-timer-box" class="flex items-center pointer-events-auto">
       <div class="w-16 h-16 rounded-full bg-gradient-to-br from-green-300 to-green-600 border-4 border-white shadow-lg flex items-center justify-center z-10">
         <span class="emoji text-3xl">⏱️</span>
       </div>
@@ -1761,6 +1783,35 @@ let micAnalyser = null;
 let micSource = null;
 let micAnimId = null;
 let lastVoiceTriggerAt = 0;
+let lastSpokenDisplayTime = 0;
+
+function setMicStatusText(text, color = '#FFFFFF') {
+  const micLabel = $('cam-mic-label');
+  if (micLabel) {
+    micLabel.textContent = text;
+    if (color) micLabel.style.color = color;
+  }
+}
+
+function showSpokenBadge(text, isCorrect = false) {
+  if (!text) return;
+  lastSpokenDisplayTime = Date.now();
+
+  const bubble = $('cam-speech-bubble');
+  const bubbleText = $('cam-speech-text');
+
+  if (bubble && bubbleText) {
+    bubbleText.textContent = `"${text}"`;
+    bubble.classList.remove('hidden');
+    setTimeout(() => {
+      if (Date.now() - lastSpokenDisplayTime >= 2700) {
+        bubble.classList.add('hidden');
+      }
+    }, 2800);
+  }
+
+  setMicStatusText(`🗣️ Bé vừa nói: "${text}" ${isCorrect ? '✅' : '...'}`, isCorrect ? '#4ADE80' : '#38BDF8');
+}
 
 function startMicAudioAnalyser(stream) {
   try {
@@ -1777,7 +1828,6 @@ function startMicAudioAnalyser(stream) {
     micSource.connect(micAnalyser);
 
     const dataArray = new Uint8Array(micAnalyser.frequencyBinCount);
-    const statusEl = $('cam-mic-status');
 
     const updateAudioLoop = () => {
       if (!camState.isRunning || $('cam-overlay').classList.contains('hidden')) return;
@@ -1788,27 +1838,23 @@ function startMicAudioAnalyser(stream) {
       const avg = sum / dataArray.length; // 0 to 255
       const vol = avg / 255; // 0.0 to 1.0
 
+      // Pass energy for visual effects in active game (e.g. bubble wobble)
+      if (GameRegistry.activeGame && GameRegistry.activeGame.onVoiceEnergy) {
+        GameRegistry.activeGame.onVoiceEnergy(vol);
+      }
+
       // Render live animated audio wave bars
       const bars = [' ', '▂', '▃', '▄', '▅', '▆', '▇', '█'];
       const barCount = Math.min(7, Math.floor(vol * 14));
       const visualWave = bars.slice(0, Math.max(1, barCount)).join('');
 
-      if (statusEl && !statusEl.textContent.includes('ĐÃ') && !statusEl.textContent.includes('Awesome')) {
-        if (vol > 0.05) {
-          statusEl.textContent = `🎤 Micro đang nhận giọng bé: [${visualWave}] (Nói to nhé!)`;
-          statusEl.style.color = '#4ADE80';
-        } else {
-          statusEl.textContent = '🎤 Bé Mây đang lắng nghe giọng bé...';
-          statusEl.style.color = '#FFFFFF';
-        }
-      }
-
-      // Voice volume energy trigger (for toddler shouting/speaking words)
       const now = Date.now();
-      if (vol > 0.20 && now - lastVoiceTriggerAt > 1100) {
-        lastVoiceTriggerAt = now;
-        if (GameRegistry.activeGame && GameRegistry.activeGame.onVoiceEnergy) {
-          GameRegistry.activeGame.onVoiceEnergy(vol);
+      // Only update audio meter if not currently displaying a spoken result badge
+      if (now - lastSpokenDisplayTime > 2600) {
+        if (vol > 0.05) {
+          setMicStatusText(`🎤 Micro đang nghe bé: [${visualWave}] (Đọc to nhé!)`, '#4ADE80');
+        } else {
+          setMicStatusText('🎤 Bé Mây đang lắng nghe giọng bé đọc...', '#FFFFFF');
         }
       }
 
@@ -1816,6 +1862,11 @@ function startMicAudioAnalyser(stream) {
     };
     if (micAnimId) cancelAnimationFrame(micAnimId);
     micAnimId = requestAnimationFrame(updateAudioLoop);
+
+  } catch (err) {
+    console.warn("Could not start audio analyser:", err);
+  }
+}
 
   } catch (err) {
     console.warn("Could not start audio analyser:", err);
@@ -2033,26 +2084,20 @@ window.onNativeSpeechResult = function(candidates, isFinal) {
 };
 
 window.onNativeSpeechStatus = function(state, msg) {
-  const status = $('cam-mic-status');
-  if (!status) return;
   if (state === 'ready' || state === 'listening') {
-    status.textContent = '🎤 Bé Mây đang lắng nghe bé đọc...';
-    status.style.color = '#38BDF8';
+    setMicStatusText('🎤 Bé Mây đang lắng nghe bé đọc...', '#38BDF8');
   } else if (state === 'permission_denied') {
-    status.textContent = '🔇 Micro bị chặn - Bố mẹ hãy cho phép quyền Micro trong cài đặt nhé';
-    status.style.color = '#EF4444';
+    setMicStatusText('🔇 Micro bị chặn - Bố mẹ hãy cho phép quyền Micro trong cài đặt nhé', '#EF4444');
   }
 };
 
 function handleSpokenCandidates(candidates, isFinal) {
   if (!camState.isRunning || !candidates || candidates.length === 0) return;
-  const status = $('cam-mic-status');
   const spokenDisplay = (candidates[0] || '').trim();
+  if (!spokenDisplay) return;
 
-  if (spokenDisplay && status) {
-    status.textContent = `🎤 Bé vừa nói: "${spokenDisplay}"`;
-    status.style.color = '#38BDF8';
-  }
+  // Always show spoken word badge immediately in floating card
+  showSpokenBadge(spokenDisplay, false);
 
   // Prevent TTS echo from triggering speech recognition
   const echoWindow = isSpeaking || (Date.now() - speakingEndedAt < 700);
@@ -2071,8 +2116,10 @@ function handleSpokenCandidates(candidates, isFinal) {
       }
     }
     if (matched) {
+      showSpokenBadge(spokenDisplay, true);
       camCorrect();
     } else if (isFinal && spokenDisplay) {
+      showSpokenBadge(spokenDisplay, false);
       camWrong();
     }
     return;
@@ -2089,16 +2136,12 @@ function handleSpokenCandidates(candidates, isFinal) {
 }
 
 function startCamRecognition() {
-  const status = $('cam-mic-status');
   camState.isRunning = true;
 
   // 1. Android Native SpeechRecognizer Bridge
   if (window.AndroidBridge && typeof window.AndroidBridge.startSpeechRecognizer === 'function' && window.AndroidBridge.hasNativeSpeechRecognizer()) {
     console.log("Using Native Android SpeechRecognizer Bridge");
-    if (status) {
-      status.textContent = '🎤 Bé Mây đang lắng nghe bé đọc...';
-      status.style.color = '#38BDF8';
-    }
+    setMicStatusText('🎤 Bé Mây đang lắng nghe bé đọc...', '#38BDF8');
     try {
       window.AndroidBridge.startSpeechRecognizer('en-US');
     } catch (e) {
@@ -2110,15 +2153,12 @@ function startCamRecognition() {
   // 2. Web Speech API (for Chrome / Desktop Browsers)
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SR) {
-    if (status) {
-      status.textContent = '🎤 Bé có thể đọc to hoặc chạm trực tiếp vào hình nhé!';
-      status.style.color = '#F59E0B';
-    }
+    setMicStatusText('🎤 Bé có thể đọc to hoặc bấm vào loa để nghe mẫu nhé!', '#F59E0B');
     return;
   }
 
   if (camState.micDenied) {
-    if (status) status.textContent = '🔇 Micro bị chặn - Bố mẹ hãy cho phép quyền Micro trong cài đặt nhé';
+    setMicStatusText('🔇 Micro bị chặn - Bố mẹ hãy cho phép quyền Micro trong cài đặt nhé', '#EF4444');
     return;
   }
 
@@ -2134,10 +2174,7 @@ function startCamRecognition() {
   camRecognition.maxAlternatives = 5;
 
   camRecognition.onstart = () => {
-    if (status) {
-      status.textContent = '🎤 Bé Mây đang lắng nghe bé đọc...';
-      status.style.color = '#38BDF8';
-    }
+    setMicStatusText('🎤 Bé Mây đang lắng nghe bé đọc...', '#38BDF8');
   };
 
   camRecognition.onresult = event => {
@@ -2941,8 +2978,8 @@ GameRegistry.register('magic_mask', {
     });
 
     hud.innerHTML = `
-      <!-- Top Mask Title & Prompt Bar -->
-      <div class="fixed top-16 inset-x-0 flex items-center justify-between px-3 pointer-events-auto z-30">
+      <!-- Top Mask Title & Prompt Bar (Placed at top-32 so it NEVER collides with mic or speech bubble) -->
+      <div class="fixed top-32 inset-x-0 flex items-center justify-between px-3 pointer-events-auto z-30">
         <button id="btn-mask-prev" class="big-btn w-11 h-11 rounded-full bg-white/95 text-slate-800 font-black text-xl shadow-lg border-2 border-white flex items-center justify-center">◀</button>
         <div id="mask-pill" class="bg-slate-900/85 backdrop-blur-md text-white font-extrabold px-4 py-2 rounded-full text-xs sm:text-sm border border-white/40 shadow-xl flex items-center gap-2 cursor-pointer">
           <span id="mask-pill-emoji" class="text-xl">🦁</span>
@@ -2955,7 +2992,7 @@ GameRegistry.register('magic_mask', {
       <!-- Bottom Horizontal Sticker Tray -->
       <div class="fixed bottom-16 inset-x-0 px-2 pointer-events-auto z-30">
         <div class="text-center mb-1">
-          <span class="bg-black/60 text-white font-black text-xs px-3 py-1 rounded-full shadow drop-shadow">🎤 Bé đọc tên con vật (hoặc chạm sticker) để biến hình nhé!</span>
+          <span class="bg-black/60 text-white font-black text-xs px-3 py-1 rounded-full shadow drop-shadow">🎤 Bé đọc tên con vật để biến hình (chạm để nghe phát âm)</span>
         </div>
         <div id="mask-stickers-tray" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-2 px-2 scroll-smooth">
           ${stickersHtml}
@@ -2989,7 +3026,7 @@ GameRegistry.register('magic_mask', {
       };
     }
 
-    // Attach click events on all sticker cards
+    // Attach click events on all sticker cards: Chạm vào để nghe phát âm và chọn, KHÔNG tự động thắng!
     const cards = hud.querySelectorAll('.mask-sticker-card');
     cards.forEach(c => {
       c.onclick = (e) => {
@@ -2997,7 +3034,7 @@ GameRegistry.register('magic_mask', {
         playPop();
         const idx = parseInt(c.dataset.idx, 10);
         this.selectMask(idx, true);
-        this.triggerTransform();
+        showSpokenBadge(`Bé hãy đọc to: "${this.masks[idx].word}" 🎤`, false);
       };
     });
   },
@@ -3080,11 +3117,12 @@ GameRegistry.register('magic_mask', {
       }
     }
     if (ok) {
+      showSpokenBadge(cur.word, true);
       this.triggerTransform();
       return;
     }
 
-    // 2. Check if child spoke ANY of the other 17 animal names!
+    // 2. Check if child spoke ANY of the other animal names!
     for (let i = 0; i < this.masks.length; i++) {
       if (i === this.currentIdx) continue;
       const m = this.masks[i];
@@ -3095,6 +3133,7 @@ GameRegistry.register('magic_mask', {
         }
       }
       if (matched) {
+        showSpokenBadge(m.word, true);
         this.selectMask(i, false);
         this.triggerTransform();
         speak(m.word);
@@ -3263,7 +3302,7 @@ GameRegistry.register('peek_a_boo', {
     if (hud) {
       hud.classList.remove('hidden');
       hud.innerHTML = `
-        <div class="fixed top-16 inset-x-0 flex items-center justify-center pointer-events-auto z-30">
+        <div class="fixed top-32 inset-x-0 flex items-center justify-center pointer-events-auto z-30">
           <button id="btn-peek-hear" class="big-btn px-4 py-1.5 bg-sky-500 text-white font-extrabold rounded-full text-xs sm:text-sm shadow-lg flex items-center gap-1.5 border-2 border-white">
             <span>🔊 Nghe phát âm: <strong>"${c.word}"</strong></span>
           </button>
@@ -3284,8 +3323,10 @@ GameRegistry.register('peek_a_boo', {
 
   onTouch(x, y) {
     if (!this.isHiding) return;
+    const c = this.characters[this.charIdx];
     playPop();
-    this.onSpeech('peek a boo');
+    speak(c.word);
+    showSpokenBadge(`Bé hãy đọc to: "${c.word}" 🎤`, false);
   },
 
   onSpeech(heard) {
@@ -3304,6 +3345,7 @@ GameRegistry.register('peek_a_boo', {
     }
 
     if (matched) {
+      showSpokenBadge(c.word, true);
       this.isHiding = false;
       this.revealedTimer = 3.6;
       this.foundCount++;
@@ -3465,7 +3507,7 @@ GameRegistry.register('object_hunter', {
     if (hud) {
       hud.classList.remove('hidden');
       hud.innerHTML = `
-        <div class="fixed top-16 inset-x-0 flex items-center justify-between px-3 pointer-events-auto z-30">
+        <div class="fixed top-32 inset-x-0 flex items-center justify-between px-3 pointer-events-auto z-30">
           <button id="btn-hunter-prev" class="big-btn w-11 h-11 rounded-full bg-white/95 text-slate-800 font-black text-xl shadow-lg border-2 border-white flex items-center justify-center">◀</button>
           <div class="bg-slate-900/85 backdrop-blur-md text-white font-extrabold px-4 py-2 rounded-full text-xs sm:text-sm border border-white/40 shadow-xl flex items-center gap-2">
             <span class="text-xl">${m.emoji}</span>
@@ -3528,6 +3570,7 @@ GameRegistry.register('object_hunter', {
     const m = this.missions[this.currentIdx];
     let matched = checkToddlerPronunciation(heard, m.target);
     if (matched) {
+      showSpokenBadge(m.target, true);
       this.confirmSuccess();
     }
   },
@@ -3812,7 +3855,9 @@ GameRegistry.register('voice_bubbles', {
     for (let i = this.bubbles.length - 1; i >= 0; i--) {
       const b = this.bubbles[i];
       if (Math.hypot(x - b.x, y - b.y) <= b.r + 20) {
-        this.burstBubble(i);
+        playPop();
+        speak(b.word);
+        showSpokenBadge(`Bé hãy đọc to: "${b.word}" 🎤`, false);
         return;
       }
     }
@@ -3826,6 +3871,7 @@ GameRegistry.register('voice_bubbles', {
     if (matched) {
       const idx = this.bubbles.findIndex(b => b.isTarget || isPop);
       if (idx !== -1) {
+        showSpokenBadge(this.bubbles[idx].word || this.targetWord, true);
         this.burstBubble(idx);
       }
     }
@@ -3958,7 +4004,9 @@ GameRegistry.register('feed_animal', {
         const fx = gap * (i + 1);
         if (Math.abs(x - fx) < 45) {
           playPop();
-          this.dropFruit(this.displayFruits[i]);
+          const f = this.displayFruits[i];
+          speak(f.word);
+          showSpokenBadge(`Bé hãy đọc to: "${f.word}" để cho ăn 🎤`, false);
           return;
         }
       }
@@ -3990,13 +4038,19 @@ GameRegistry.register('feed_animal', {
   onSpeech(heard) {
     if (this.fallingFruit || this.isEating) return;
     if (checkToddlerPronunciation(heard, this.requested.word)) {
+      showSpokenBadge(this.requested.word, true);
       this.dropFruit(this.requested);
       return;
     }
     // Also check if child said any of the other displayed fruits!
     for (const df of this.displayFruits) {
       if (checkToddlerPronunciation(heard, df.word)) {
+        showSpokenBadge(df.word, true);
         this.dropFruit(df);
+        return;
+      }
+    }
+  },
         return;
       }
     }
@@ -4329,7 +4383,7 @@ GameRegistry.register('polaroid_studio', {
 
 // OTA Engine & Admin Management
 const OTAEngine = {
-  VERSION: "1.2.0",
+  VERSION: "1.3.1",
   DEFAULT_URL: "https://raw.githubusercontent.com/haitruongproqt1-a11y/be-may-english/main/version.json",
 
   getConfig() {
@@ -4674,6 +4728,8 @@ function init() {
   });
 
   $('cam-back-btn').addEventListener('click', () => { playPop(); closeCameraGame(); });
+  const camSetBtn = $('cam-settings-btn');
+  if (camSetBtn) camSetBtn.addEventListener('click', () => { playPop(); openSettings(); });
   $('cam-btn-home').addEventListener('click', () => { playPop(); closeCameraGame(); if (state.currentView === 'lesson') goBackToPath(); });
   $('cam-btn-replay').addEventListener('click', () => { playPop(); startCameraRound(); });
   $('cam-card-speak').addEventListener('click', () => { playPop(); const w = currentCamWord(); if (w) speak(w.en); });
