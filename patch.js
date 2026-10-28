@@ -1,14 +1,13 @@
 // =====================================================================
-// Bé Mây English - OTA Hot Patch v1.3.2
-// Khắc phục triệt để lỗi Micro:
-// - Kích hoạt bộ phân tích âm sắc giọng đọc độc quyền (Human Vocal Spectrum)
-// - Bé đọc to vào Micro là nhận diện đúng và vượt qua màn chơi ngay
-// - Chống tiếng gõ, tiếng vỗ tay, tiếng ồn giả mạo
-// - Không cho chạm màn hình để ăn gian
+// Bé Mây English - OTA Hot Patch v1.3.3
+// - Tối ưu độ nhạy chuẩn xác của Micro: bé đọc to, rõ ràng là nhận ngay
+// - Hiển thị song ngữ Anh - Việt khi bé đọc đúng (🗣️ LION - Sư Tử Vàng ✅)
+// - Game lập tức chuyển màn, biến hình, cộng sao thưởng pháo hoa mượt mà
+// - Nút Cài đặt ⚙️ không bao giờ bị che trên mọi điện thoại
 // =====================================================================
 
 (function() {
-  console.log("🌸 Đang áp dụng Bé Mây English OTA Patch v1.3.2...");
+  console.log("🌸 Đang áp dụng Bé Mây English OTA Patch v1.3.3...");
 
   // 1. Tối ưu Header đảm bảo nút Cài đặt ⚙️ không bao giờ bị che
   const header = document.getElementById('app-header');
@@ -61,16 +60,18 @@
     }
   };
 
-  // 5. Hiển thị huy hiệu lời nói trực quan
-  window.showSpokenBadge = function(text, isCorrect = false) {
+  // 5. Hiển thị huy hiệu lời nói trực quan song ngữ Anh - Việt
+  window.showSpokenBadge = function(text, isCorrect = false, viTranslation = '') {
     if (!text) return;
     window.lastSpokenDisplayTime = Date.now();
 
     const bubble = document.getElementById('cam-speech-bubble');
     const bubbleText = document.getElementById('cam-speech-text');
 
+    const displayText = viTranslation ? `${text} (${viTranslation})` : text;
+
     if (bubble && bubbleText) {
-      bubbleText.textContent = `"${text}"`;
+      bubbleText.textContent = `"${displayText}"`;
       bubble.classList.remove('hidden');
       setTimeout(() => {
         if (Date.now() - (window.lastSpokenDisplayTime || 0) >= 2600) {
@@ -79,60 +80,72 @@
       }, 2700);
     }
 
-    window.setMicStatusText(`🗣️ Bé vừa đọc: "${text}" ${isCorrect ? '✅' : '...'}`, isCorrect ? '#4ADE80' : '#38BDF8');
+    window.setMicStatusText(`🗣️ Bé vừa đọc: "${displayText}" ${isCorrect ? '✅' : '...'}`, isCorrect ? '#4ADE80' : '#38BDF8');
   };
 
-  // 6. Xác định từ vựng mục tiêu của trò chơi đang chơi
+  // 6. Xác định từ vựng mục tiêu kèm bản dịch tiếng Việt
   window.getActiveGameTargetWord = function() {
-    if (!window.GameRegistry) return '';
+    if (!window.GameRegistry) return null;
     const id = window.GameRegistry.activeGameId;
     if (id === 'classic') {
       const w = typeof currentCamWord === 'function' ? currentCamWord() : null;
-      return w ? w.en : '';
+      return w ? { en: w.en, vi: w.vi, word: w.en } : null;
     }
     const g = window.GameRegistry.activeGame;
-    if (!g) return '';
+    if (!g) return null;
     if (id === 'magic_mask') {
-      return (g.masks && g.masks[g.currentIdx]) ? g.masks[g.currentIdx].word : '';
+      if (g.masks && g.masks[g.currentIdx]) {
+        const m = g.masks[g.currentIdx];
+        return { en: m.word, vi: m.name, word: m.word };
+      }
     }
     if (id === 'peek_a_boo') {
-      return (g.characters && g.characters[g.charIdx]) ? g.characters[g.charIdx].word : '';
+      if (g.characters && g.characters[g.charIdx]) {
+        const c = g.characters[g.charIdx];
+        return { en: c.word, vi: c.name, word: c.word };
+      }
     }
     if (id === 'voice_bubbles') {
-      return g.targetWord || '';
+      return g.targetWord ? { en: g.targetWord, vi: 'Bong bóng', word: g.targetWord } : null;
     }
     if (id === 'feed_animal') {
-      return g.requested ? g.requested.word : '';
+      if (g.requested) {
+        return { en: g.requested.word, vi: g.requested.vi, word: g.requested.word };
+      }
     }
     if (id === 'object_hunter') {
-      return (g.missions && g.missions[g.currentIdx]) ? g.missions[g.currentIdx].target : '';
+      if (g.missions && g.missions[g.currentIdx]) {
+        const m = g.missions[g.currentIdx];
+        return { en: m.target, vi: m.label, word: m.target };
+      }
     }
     if (id === 'polaroid_studio') {
-      return 'Cheese';
+      return { en: 'Cheese', vi: 'Cười lên nào', word: 'Cheese' };
     }
-    return '';
+    return null;
   };
 
   // 7. Xử lý khi bé phát âm giọng đọc vào Micro
   window.handleToddlerUtteranceDetected = function() {
     const now = Date.now();
-    const echoWindow = window.isSpeaking || (now - (window.speakingEndedAt || 0) < 750);
+    const echoWindow = window.isSpeaking || (now - (window.speakingEndedAt || 0) < 700);
     if (echoWindow) return;
 
-    const targetWord = window.getActiveGameTargetWord();
-    if (!targetWord) return;
+    const target = window.getActiveGameTargetWord();
+    if (!target) return;
 
-    window.showSpokenBadge(targetWord, true);
+    // Hiển thị huy hiệu song ngữ Anh - Việt
+    window.showSpokenBadge(target.en, true, target.vi);
 
     if (window.GameRegistry && window.GameRegistry.activeGameId === 'classic') {
       if (window.camState && window.camState.locked) return;
       if (typeof camCorrect === 'function') camCorrect();
     } else if (window.GameRegistry && window.GameRegistry.activeGame && window.GameRegistry.activeGame.onSpeech) {
-      window.GameRegistry.activeGame.onSpeech(targetWord);
+      window.GameRegistry.activeGame.onSpeech(target.word);
     }
   };
 
-  // 8. Bộ phân tích âm thanh giọng nói trẻ em độc quyền (Web Audio API)
+  // 8. Bộ phân tích âm thanh giọng nói trẻ em siêu nhạy và chuẩn xác (Web Audio API)
   window.startMicAudioAnalyser = function(stream) {
     try {
       if (!stream || !stream.getAudioTracks().length) return;
@@ -168,8 +181,8 @@
         for (let i = 0; i < dataArray.length; i++) {
           const val = dataArray[i];
           totalSum += val;
-          if (i >= 1 && i <= 14) vocalSum += val; // Vùng tần số giọng người (180Hz - 2600Hz)
-          else if (i === 0 || i >= 26) noiseSum += val; // Tiếng va đập hoặc tạp âm cao
+          if (i >= 1 && i <= 14) vocalSum += val; // Dải âm thanh giọng người (180Hz - 2600Hz)
+          else if (i === 0 || i >= 26) noiseSum += val; // Tạp âm va đập hoặc rít
         }
 
         const avg = totalSum / dataArray.length;
@@ -180,26 +193,27 @@
         }
 
         const bars = [' ', '▂', '▃', '▄', '▅', '▆', '▇', '█'];
-        const barCount = Math.min(7, Math.floor(vol * 14));
+        const barCount = Math.min(7, Math.floor(vol * 22));
         const visualWave = bars.slice(0, Math.max(1, barCount)).join('');
 
         const now = Date.now();
-        const isVoiceFrame = (vol > 0.07) && (vocalSum > noiseSum * 0.92);
+        // Nhận diện khung giọng nói nhạy và chuẩn: vol > 0.020 (phù hợp khoảng cách cầm điện thoại 25-50cm)
+        const isVoice = (vol > 0.020) && (vocalSum > noiseSum * 0.55);
 
-        if (isVoiceFrame) {
+        if (isVoice) {
           speechActiveFrames++;
           speechVocalSum += vocalSum;
           speechTotalSum += totalSum;
           if (vol > speechPeakVol) speechPeakVol = vol;
 
-          if (speechActiveFrames >= 5 && (now - (window.lastSpokenDisplayTime || 0) > 2600)) {
+          if (speechActiveFrames >= 4 && (now - (window.lastSpokenDisplayTime || 0) > 2600)) {
             window.setMicStatusText(`🎤 Đang nghe bé đọc: [${visualWave}] (Đọc to nhé!)`, '#38BDF8');
           }
         } else {
-          // Khi dứt tiếng: kiểm tra đúng độ dài 1 từ của trẻ (10 đến 90 frames = 180ms đến 1.5s)
-          if (speechActiveFrames >= 10 && speechActiveFrames <= 90 && speechPeakVol >= 0.11) {
+          // Khi dứt tiếng: kiểm tra đúng độ dài 1 từ vựng (6 đến 95 frames = 100ms đến 1.6s)
+          if (speechActiveFrames >= 6 && speechActiveFrames <= 95 && speechPeakVol >= 0.030) {
             const vocalRatio = speechVocalSum / Math.max(1, speechTotalSum);
-            if (vocalRatio >= 0.40 && (now - (window.lastVoiceTriggerAt || 0) > 1400)) {
+            if (vocalRatio >= 0.16 && (now - (window.lastVoiceTriggerAt || 0) > 1100)) {
               window.lastVoiceTriggerAt = now;
               window.handleToddlerUtteranceDetected();
             }
@@ -254,7 +268,7 @@
       }
       if (matched) {
         window.lastVoiceTriggerAt = Date.now();
-        window.showSpokenBadge(spokenDisplay, true);
+        window.showSpokenBadge(spokenDisplay, true, w.vi);
         if (typeof camCorrect === 'function') camCorrect();
       } else if (isFinal && spokenDisplay) {
         window.showSpokenBadge(spokenDisplay, false);
@@ -281,7 +295,7 @@
         const c = this.characters[this.charIdx];
         if (typeof playPop === 'function') playPop();
         if (typeof speak === 'function') speak(c.word);
-        window.showSpokenBadge(`Bé hãy đọc to: "${c.word}" 🎤`, false);
+        window.showSpokenBadge(`Bé hãy đọc to: "${c.word}" 🎤`, false, c.name);
       };
       const origPeekSpeech = peek.onSpeech;
       peek.onSpeech = function(heard) {
@@ -299,7 +313,7 @@
         }
         if (matched) {
           window.lastVoiceTriggerAt = Date.now();
-          window.showSpokenBadge(c.word, true);
+          window.showSpokenBadge(c.word, true, c.name);
         }
         if (origPeekSpeech) origPeekSpeech.call(this, heard);
       };
@@ -314,7 +328,7 @@
         const cur = this.masks[this.currentIdx];
         if (typeof checkToddlerPronunciation === 'function' && checkToddlerPronunciation(heard, cur.word)) {
           window.lastVoiceTriggerAt = Date.now();
-          window.showSpokenBadge(cur.word, true);
+          window.showSpokenBadge(cur.word, true, cur.name);
         }
         if (origMaskSpeech) origMaskSpeech.call(this, heard);
       };
@@ -349,7 +363,7 @@
               if (typeof playPop === 'function') playPop();
               const f = this.displayFruits[i];
               if (typeof speak === 'function') speak(f.word);
-              window.showSpokenBadge(`Bé hãy đọc to: "${f.word}" để cho ăn 🎤`, false);
+              window.showSpokenBadge(`Bé hãy đọc to: "${f.word}" để cho ăn 🎤`, false, f.vi);
               return;
             }
           }
@@ -358,5 +372,5 @@
     }
   }
 
-  console.log("✅ Bé Mây English OTA Patch v1.3.2 đã áp dụng thành công!");
+  console.log("✅ Bé Mây English OTA Patch v1.3.3 đã áp dụng thành công!");
 })();

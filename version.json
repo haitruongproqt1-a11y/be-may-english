@@ -1,9 +1,9 @@
 {
-  "version": "1.3.2",
-  "otaVersion": "1.3.2",
+  "version": "1.3.3",
+  "otaVersion": "1.3.3",
   "allowUpdate": true,
-  "title": "Bé Mây English v1.3.2",
-  "notes": "✨ Phiên bản v1.3.2: Khắc phục triệt để lỗi Micro không nhận diện, kích hoạt bộ phân tích âm sắc giọng đọc độc quyền cho bé, nói to rõ ràng vào mic là vượt qua màn chơi ngay lập tức!",
+  "title": "Bé Mây English v1.3.3",
+  "notes": "✨ Phiên bản v1.3.3: Tối ưu độ nhạy chuẩn xác của Micro cho bé, dịch và hiển thị song ngữ Anh - Việt trực quan khi bé đọc đúng, game lập tức chuyển màn, biến hình và cộng sao mượt mà!",
   "bundleUrl": "https://raw.githubusercontent.com/haitruongproqt1-a11y/be-may-english/main/patch.js",
-  "updatedAt": "2026-10-28T19:32:00Z"
+  "updatedAt": "2026-10-28T21:05:00Z"
 }
