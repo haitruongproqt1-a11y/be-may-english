@@ -4330,16 +4330,19 @@ GameRegistry.register('polaroid_studio', {
 // OTA Engine & Admin Management
 const OTAEngine = {
   VERSION: "1.2.0",
-  DEFAULT_URL: "",
+  DEFAULT_URL: "https://raw.githubusercontent.com/haitruongproqt1-a11y/be-may-english/main/version.json",
 
   getConfig() {
-    return safeParse('bemay_ota_config', {
+    const defaultUrl = this.DEFAULT_URL;
+    const cfg = safeParse('bemay_ota_config', {
       appVersion: this.VERSION,
       otaVersion: this.VERSION,
-      serverUrl: this.DEFAULT_URL,
+      serverUrl: defaultUrl,
       allowUpdate: true,
       lastCheck: 0
     });
+    if (!cfg.serverUrl) cfg.serverUrl = defaultUrl;
+    return cfg;
   },
 
   saveConfig(cfg) {
