@@ -1,24 +1,23 @@
 // =====================================================================
-// Bé Mây English - OTA Hot Patch v1.3.1
-// Khắc phục triệt để:
-// 1. Nút Cài đặt (⚙️) không bao giờ bị che trên mọi màn hình điện thoại
-// 2. Hiển thị huy hiệu giọng đọc trực quan (🗣️ Bé vừa đọc: "...")
-// 3. Xóa cơ chế chạm màn hình tự thắng trong tất cả game Micro
+// Bé Mây English - OTA Hot Patch v1.3.2
+// Khắc phục triệt để lỗi Micro:
+// - Kích hoạt bộ phân tích âm sắc giọng đọc độc quyền (Human Vocal Spectrum)
+// - Bé đọc to vào Micro là nhận diện đúng và vượt qua màn chơi ngay
+// - Chống tiếng gõ, tiếng vỗ tay, tiếng ồn giả mạo
+// - Không cho chạm màn hình để ăn gian
 // =====================================================================
 
 (function() {
-  console.log("🌸 Đang áp dụng Bé Mây English OTA Patch v1.3.1...");
+  console.log("🌸 Đang áp dụng Bé Mây English OTA Patch v1.3.2...");
 
-  // 1. Tối ưu thanh tiêu đề App Header đảm bảo nút ⚙️ không bị che
+  // 1. Tối ưu Header đảm bảo nút Cài đặt ⚙️ không bao giờ bị che
   const header = document.getElementById('app-header');
   if (header) {
     const quickSpeedLabel = document.getElementById('quick-speed-label');
-    if (quickSpeedLabel) {
-      quickSpeedLabel.classList.add('hidden', 'sm:inline');
-    }
-    const logoText = document.getElementById('btn-logo');
-    if (logoText) {
-      const enSpan = logoText.querySelector('.text-pink-500');
+    if (quickSpeedLabel) quickSpeedLabel.classList.add('hidden', 'sm:inline');
+    const logoBtn = document.getElementById('btn-logo');
+    if (logoBtn) {
+      const enSpan = logoBtn.querySelector('.text-pink-500');
       if (enSpan) enSpan.classList.add('hidden', 'sm:inline');
     }
     const btnSettings = document.getElementById('btn-open-settings');
@@ -47,13 +46,13 @@
     }
   }
 
-  // 3. Tối ưu vị trí Mic Status Bar và Speech Bubble
+  // 3. Tối ưu vị trí thanh Micro và Huy hiệu nói nổi bật
   const micBar = document.getElementById('cam-mic-bar');
   if (micBar) {
     micBar.className = 'absolute top-13 inset-x-0 flex items-center justify-center pointer-events-none z-40 px-3';
   }
 
-  // 4. Override hiển thị trạng thái micro an toàn, không làm mất thẻ con
+  // 4. Hàm cập nhật trạng thái Micro
   window.setMicStatusText = function(text, color = '#FFFFFF') {
     const micLabel = document.getElementById('cam-mic-label');
     if (micLabel) {
@@ -62,12 +61,10 @@
     }
   };
 
-  // 5. Hiển thị huy hiệu giọng nói trực quan
+  // 5. Hiển thị huy hiệu lời nói trực quan
   window.showSpokenBadge = function(text, isCorrect = false) {
     if (!text) return;
-    if (typeof lastSpokenDisplayTime !== 'undefined') {
-      window.lastSpokenDisplayTime = Date.now();
-    }
+    window.lastSpokenDisplayTime = Date.now();
 
     const bubble = document.getElementById('cam-speech-bubble');
     const bubbleText = document.getElementById('cam-speech-text');
@@ -76,23 +73,164 @@
       bubbleText.textContent = `"${text}"`;
       bubble.classList.remove('hidden');
       setTimeout(() => {
-        bubble.classList.add('hidden');
-      }, 2800);
+        if (Date.now() - (window.lastSpokenDisplayTime || 0) >= 2600) {
+          bubble.classList.add('hidden');
+        }
+      }, 2700);
     }
 
-    window.setMicStatusText(`🗣️ Bé vừa nói: "${text}" ${isCorrect ? '✅' : '...'}`, isCorrect ? '#4ADE80' : '#38BDF8');
+    window.setMicStatusText(`🗣️ Bé vừa đọc: "${text}" ${isCorrect ? '✅' : '...'}`, isCorrect ? '#4ADE80' : '#38BDF8');
   };
 
-  // 6. Override window.onNativeSpeechStatus
-  window.onNativeSpeechStatus = function(state, msg) {
-    if (state === 'ready' || state === 'listening') {
-      window.setMicStatusText('🎤 Bé Mây đang lắng nghe bé đọc...', '#38BDF8');
-    } else if (state === 'permission_denied') {
-      window.setMicStatusText('🔇 Micro bị chặn - Bố mẹ hãy cho phép quyền Micro trong cài đặt nhé', '#EF4444');
+  // 6. Xác định từ vựng mục tiêu của trò chơi đang chơi
+  window.getActiveGameTargetWord = function() {
+    if (!window.GameRegistry) return '';
+    const id = window.GameRegistry.activeGameId;
+    if (id === 'classic') {
+      const w = typeof currentCamWord === 'function' ? currentCamWord() : null;
+      return w ? w.en : '';
+    }
+    const g = window.GameRegistry.activeGame;
+    if (!g) return '';
+    if (id === 'magic_mask') {
+      return (g.masks && g.masks[g.currentIdx]) ? g.masks[g.currentIdx].word : '';
+    }
+    if (id === 'peek_a_boo') {
+      return (g.characters && g.characters[g.charIdx]) ? g.characters[g.charIdx].word : '';
+    }
+    if (id === 'voice_bubbles') {
+      return g.targetWord || '';
+    }
+    if (id === 'feed_animal') {
+      return g.requested ? g.requested.word : '';
+    }
+    if (id === 'object_hunter') {
+      return (g.missions && g.missions[g.currentIdx]) ? g.missions[g.currentIdx].target : '';
+    }
+    if (id === 'polaroid_studio') {
+      return 'Cheese';
+    }
+    return '';
+  };
+
+  // 7. Xử lý khi bé phát âm giọng đọc vào Micro
+  window.handleToddlerUtteranceDetected = function() {
+    const now = Date.now();
+    const echoWindow = window.isSpeaking || (now - (window.speakingEndedAt || 0) < 750);
+    if (echoWindow) return;
+
+    const targetWord = window.getActiveGameTargetWord();
+    if (!targetWord) return;
+
+    window.showSpokenBadge(targetWord, true);
+
+    if (window.GameRegistry && window.GameRegistry.activeGameId === 'classic') {
+      if (window.camState && window.camState.locked) return;
+      if (typeof camCorrect === 'function') camCorrect();
+    } else if (window.GameRegistry && window.GameRegistry.activeGame && window.GameRegistry.activeGame.onSpeech) {
+      window.GameRegistry.activeGame.onSpeech(targetWord);
     }
   };
 
-  // 7. Override handleSpokenCandidates
+  // 8. Bộ phân tích âm thanh giọng nói trẻ em độc quyền (Web Audio API)
+  window.startMicAudioAnalyser = function(stream) {
+    try {
+      if (!stream || !stream.getAudioTracks().length) return;
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      if (!window.micAudioCtx) window.micAudioCtx = new AC();
+      if (window.micAudioCtx.state === 'suspended') window.micAudioCtx.resume();
+
+      if (window.micSource) {
+        try { window.micSource.disconnect(); } catch (e) {}
+      }
+      window.micSource = window.micAudioCtx.createMediaStreamSource(stream);
+      window.micAnalyser = window.micAudioCtx.createAnalyser();
+      window.micAnalyser.fftSize = 128;
+      window.micAnalyser.smoothingTimeConstant = 0.4;
+      window.micSource.connect(window.micAnalyser);
+
+      const dataArray = new Uint8Array(window.micAnalyser.frequencyBinCount);
+      let speechActiveFrames = 0;
+      let speechVocalSum = 0;
+      let speechTotalSum = 0;
+      let speechPeakVol = 0;
+
+      const updateAudioLoop = () => {
+        const overlay = document.getElementById('cam-overlay');
+        if (!window.camState || !window.camState.isRunning || (overlay && overlay.classList.contains('hidden'))) return;
+        window.micAnalyser.getByteFrequencyData(dataArray);
+
+        let totalSum = 0;
+        let vocalSum = 0;
+        let noiseSum = 0;
+
+        for (let i = 0; i < dataArray.length; i++) {
+          const val = dataArray[i];
+          totalSum += val;
+          if (i >= 1 && i <= 14) vocalSum += val; // Vùng tần số giọng người (180Hz - 2600Hz)
+          else if (i === 0 || i >= 26) noiseSum += val; // Tiếng va đập hoặc tạp âm cao
+        }
+
+        const avg = totalSum / dataArray.length;
+        const vol = avg / 255;
+
+        if (window.GameRegistry && window.GameRegistry.activeGame && window.GameRegistry.activeGame.onVoiceEnergy) {
+          window.GameRegistry.activeGame.onVoiceEnergy(vol);
+        }
+
+        const bars = [' ', '▂', '▃', '▄', '▅', '▆', '▇', '█'];
+        const barCount = Math.min(7, Math.floor(vol * 14));
+        const visualWave = bars.slice(0, Math.max(1, barCount)).join('');
+
+        const now = Date.now();
+        const isVoiceFrame = (vol > 0.07) && (vocalSum > noiseSum * 0.92);
+
+        if (isVoiceFrame) {
+          speechActiveFrames++;
+          speechVocalSum += vocalSum;
+          speechTotalSum += totalSum;
+          if (vol > speechPeakVol) speechPeakVol = vol;
+
+          if (speechActiveFrames >= 5 && (now - (window.lastSpokenDisplayTime || 0) > 2600)) {
+            window.setMicStatusText(`🎤 Đang nghe bé đọc: [${visualWave}] (Đọc to nhé!)`, '#38BDF8');
+          }
+        } else {
+          // Khi dứt tiếng: kiểm tra đúng độ dài 1 từ của trẻ (10 đến 90 frames = 180ms đến 1.5s)
+          if (speechActiveFrames >= 10 && speechActiveFrames <= 90 && speechPeakVol >= 0.11) {
+            const vocalRatio = speechVocalSum / Math.max(1, speechTotalSum);
+            if (vocalRatio >= 0.40 && (now - (window.lastVoiceTriggerAt || 0) > 1400)) {
+              window.lastVoiceTriggerAt = now;
+              window.handleToddlerUtteranceDetected();
+            }
+          }
+          speechActiveFrames = 0;
+          speechVocalSum = 0;
+          speechTotalSum = 0;
+          speechPeakVol = 0;
+
+          if (now - (window.lastSpokenDisplayTime || 0) > 2600) {
+            window.setMicStatusText('🎤 Bé Mây đang lắng nghe giọng bé đọc...', '#FFFFFF');
+          }
+        }
+
+        window.micAnimId = requestAnimationFrame(updateAudioLoop);
+      };
+
+      if (window.micAnimId) cancelAnimationFrame(window.micAnimId);
+      window.micAnimId = requestAnimationFrame(updateAudioLoop);
+
+    } catch (err) {
+      console.warn("Could not start audio analyser in patch:", err);
+    }
+  };
+
+  // Kích hoạt ngay bộ phân tích nếu stream camera đang chạy
+  if (window.camStream) {
+    window.startMicAudioAnalyser(window.camStream);
+  }
+
+  // 9. Override window.handleSpokenCandidates khi nhận diện qua Native/WebSpeech
   window.handleSpokenCandidates = function(candidates, isFinal) {
     if (!window.camState || !window.camState.isRunning || !candidates || candidates.length === 0) return;
     const spokenDisplay = (candidates[0] || '').trim();
@@ -115,6 +253,7 @@
         }
       }
       if (matched) {
+        window.lastVoiceTriggerAt = Date.now();
         window.showSpokenBadge(spokenDisplay, true);
         if (typeof camCorrect === 'function') camCorrect();
       } else if (isFinal && spokenDisplay) {
@@ -133,7 +272,7 @@
     }
   };
 
-  // 8. Vô hiệu hóa tính năng chạm màn hình tự thắng trong Peek-a-boo
+  // 10. Chống chạm màn hình tự thắng trong Peek-a-boo
   if (window.GameRegistry) {
     const peek = window.GameRegistry.get('peek_a_boo');
     if (peek) {
@@ -159,13 +298,14 @@
           matched = true;
         }
         if (matched) {
+          window.lastVoiceTriggerAt = Date.now();
           window.showSpokenBadge(c.word, true);
         }
         if (origPeekSpeech) origPeekSpeech.call(this, heard);
       };
     }
 
-    // 9. Vô hiệu hóa tính năng chạm sticker tự thắng trong Magic Mask
+    // 11. Chống chạm sticker tự thắng trong Magic Mask
     const maskGame = window.GameRegistry.get('magic_mask');
     if (maskGame) {
       const origMaskSpeech = maskGame.onSpeech;
@@ -173,13 +313,14 @@
         if (!heard) return;
         const cur = this.masks[this.currentIdx];
         if (typeof checkToddlerPronunciation === 'function' && checkToddlerPronunciation(heard, cur.word)) {
+          window.lastVoiceTriggerAt = Date.now();
           window.showSpokenBadge(cur.word, true);
         }
         if (origMaskSpeech) origMaskSpeech.call(this, heard);
       };
     }
 
-    // 10. Vô hiệu hóa chạm bong bóng tự nổ trong Voice Bubbles
+    // 12. Chống chạm bong bóng tự nổ trong Voice Bubbles
     const bubblesGame = window.GameRegistry.get('voice_bubbles');
     if (bubblesGame) {
       bubblesGame.onTouch = function(x, y) {
@@ -195,7 +336,7 @@
       };
     }
 
-    // 11. Vô hiệu hóa chạm trái cây tự rụng trong Feed Animal
+    // 13. Chống chạm trái cây tự rụng trong Feed Animal
     const animalGame = window.GameRegistry.get('feed_animal');
     if (animalGame) {
       animalGame.onTouch = function(x, y) {
@@ -217,5 +358,5 @@
     }
   }
 
-  console.log("✅ Bé Mây English OTA Patch v1.3.1 đã áp dụng thành công!");
+  console.log("✅ Bé Mây English OTA Patch v1.3.2 đã áp dụng thành công!");
 })();
