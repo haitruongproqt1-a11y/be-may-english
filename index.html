@@ -213,7 +213,9 @@
 
     <!-- Right Controls: Designed specifically for mobile screens, NEVER cut off! -->
     <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
-      
+      <button id="btn-open-cam-global" class="big-btn bg-gradient-to-r from-sky-400 to-indigo-500 hover:from-sky-500 hover:to-indigo-600 text-white font-extrabold rounded-full px-2.5 sm:px-3 py-1.5 text-xs shadow-md flex items-center gap-1 shrink-0" title="Trung Tâm Trò Chơi AR">
+        <span class="emoji text-sm sm:text-base">📸</span><span class="hidden md:inline">Camera AR</span>
+      </button>
 
       <div class="bg-amber-100 text-amber-700 font-black rounded-full px-2 py-1 text-xs flex items-center gap-1 shadow-sm shrink-0">
         <span class="emoji text-xs sm:text-sm">⭐</span><span id="star-count">0</span>
@@ -249,6 +251,55 @@
       <button data-week="2" class="filter-btn big-btn shrink-0 bg-white rounded-3xl px-4 py-3 font-extrabold shadow">🏝️ Đảo Tuần 2</button>
       <button data-week="3" class="filter-btn big-btn shrink-0 bg-white rounded-3xl px-4 py-3 font-extrabold shadow">🏝️ Đảo Tuần 3</button>
       <button data-week="4" class="filter-btn big-btn shrink-0 bg-white rounded-3xl px-4 py-3 font-extrabold shadow">🏝️ Đảo Tuần 4</button>
+    </div>
+
+    <!-- ===== TRUNG TÂM TRÒ CHƠI AR & GIỌNG NÓI ĐA NĂNG ===== -->
+    <div class="mb-6 bg-gradient-to-br from-indigo-900/95 via-sky-900 to-purple-950 rounded-3xl p-4 sm:p-5 text-white shadow-2xl relative overflow-hidden border-2 border-indigo-400/40">
+      <div class="absolute -right-8 -bottom-8 emoji text-9xl opacity-10 pointer-events-none">🎪</div>
+      <div class="flex items-center justify-between mb-3 relative z-10">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black flex items-center gap-2 text-amber-300">
+            <span class="emoji text-3xl">🎪</span> Trung Tâm Trò Chơi AR & Giọng Nói
+          </h2>
+          <p class="text-xs sm:text-sm font-bold text-sky-200">150+ Từ vựng • Chống lặp tuyệt đối • 5 Chế độ chơi Camera & Micro siêu đỉnh</p>
+        </div>
+        <button id="btn-quick-play-hub" class="big-btn bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-black rounded-full px-3.5 py-1.5 text-xs sm:text-sm shadow-lg flex items-center gap-1.5 shrink-0">
+          <span>▶️</span> <span>Chơi Ngay</span>
+        </button>
+      </div>
+
+      <!-- Lưới 5 Chế Độ Chơi AR Mini-Games -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 sm:gap-3 relative z-10">
+        <div class="ar-mode-card big-btn rounded-2xl p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border-2 border-white/30 text-center cursor-pointer shadow-lg transition-transform" data-mode="classic">
+          <div class="emoji text-4xl sm:text-5xl my-1 mascot-bounce">👑</div>
+          <div class="font-black text-amber-300 text-sm">Thẻ Nổi Thần Kỳ</div>
+          <div class="text-[11px] font-semibold text-slate-200 mt-0.5">10 hình / 60s trên đầu bé</div>
+        </div>
+
+        <div class="ar-mode-card big-btn rounded-2xl p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border-2 border-white/30 text-center cursor-pointer shadow-lg transition-transform" data-mode="bubble">
+          <div class="emoji text-4xl sm:text-5xl my-1 mascot-bounce">🫧</div>
+          <div class="font-black text-cyan-300 text-sm">Bong Bóng Bay Lên</div>
+          <div class="text-[11px] font-semibold text-slate-200 mt-0.5">Đọc đúng nổ sao lấp lánh</div>
+        </div>
+
+        <div class="ar-mode-card big-btn rounded-2xl p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border-2 border-white/30 text-center cursor-pointer shadow-lg transition-transform" data-mode="mask">
+          <div class="emoji text-4xl sm:text-5xl my-1 mascot-bounce">🎭</div>
+          <div class="font-black text-pink-300 text-sm">Hóa Trang & Kêu</div>
+          <div class="text-[11px] font-semibold text-slate-200 mt-0.5">Đọc tên hoặc giả tiếng thú</div>
+        </div>
+
+        <div class="ar-mode-card big-btn rounded-2xl p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border-2 border-white/30 text-center cursor-pointer shadow-lg transition-transform" data-mode="giftbox">
+          <div class="emoji text-4xl sm:text-5xl my-1 mascot-bounce">🎁</div>
+          <div class="font-black text-emerald-300 text-sm">Hộp Quà Bí Mật</div>
+          <div class="text-[11px] font-semibold text-slate-200 mt-0.5">Đọc thần chú mở nắp quà</div>
+        </div>
+
+        <div class="ar-mode-card big-btn rounded-2xl p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border-2 border-amber-300 text-center cursor-pointer shadow-lg transition-transform col-span-2 sm:col-span-1" data-mode="rapid">
+          <div class="emoji text-4xl sm:text-5xl my-1 mascot-bounce">⚡</div>
+          <div class="font-black text-yellow-300 text-sm">Phản Xạ Thần Tốc</div>
+          <div class="text-[11px] font-semibold text-slate-200 mt-0.5">Hỏi đáp tích Combo Streak</div>
+        </div>
+      </div>
     </div>
 
     
@@ -323,6 +374,209 @@
       <button id="mascot-speak-btn" class="big-btn shrink-0 w-12 h-12 rounded-full bg-sky-100 flex items-center justify-center shadow" aria-label="Nghe lại">
         <span class="emoji text-2xl">🔊</span>
       </button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= CAMERA AR OVERLAY (AR & VOICE GAME HUB) ================= -->
+<div id="cam-overlay" class="cam-overlay hidden">
+  <video id="cam-video" class="absolute inset-0 w-full h-full object-cover" style="transform: scaleX(-1);" autoplay playsinline muted></video>
+  <div id="cam-fallback" class="absolute inset-0 cam-sky hidden">
+    <div class="cloud emoji" style="top:12%;animation-duration:38s;animation-delay:-5s">☁️</div>
+    <div class="cloud emoji" style="top:42%;animation-duration:52s;animation-delay:-20s;font-size:110px">☁️</div>
+    <div class="cloud emoji" style="top:70%;animation-duration:44s;animation-delay:-32s;font-size:70px">☁️</div>
+    <div class="absolute bottom-40 left-1/2 -translate-x-1/2 emoji text-[120px] opacity-90 float-up">👧</div>
+    <div class="absolute top-24 right-6 emoji text-6xl">🌈</div>
+  </div>
+  <div class="cam-top-strip absolute top-0 inset-x-0 h-48 pointer-events-none"></div>
+
+  <!-- AR Canvas for bubbles, floating masks, confetti, effects -->
+  <canvas id="cam-ar-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-10"></canvas>
+
+  <!-- Top HUD Bar -->
+  <div class="absolute top-0 inset-x-0 px-2.5 pt-2.5 flex items-center justify-between gap-1.5 z-30">
+    <button id="cam-back-btn" class="big-btn w-10 h-10 rounded-full bg-white/90 hover:bg-white text-xl font-black text-rose-500 shadow-lg shrink-0 flex items-center justify-center border border-rose-200">⬅</button>
+    
+    <!-- Progress Coin Track -->
+    <div id="cam-progress-wrap" class="flex-1 max-w-xs relative flex items-center mx-1">
+      <div id="cam-coin-badge" class="coin-badge absolute -left-2 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-black text-sm text-white shadow">1</div>
+      <div class="progress-track flex-1 ml-4 sm:ml-5 bg-black/40 border border-white/40 h-4 rounded-full overflow-hidden relative">
+        <div id="cam-progress-bar" class="progress-fill h-full bg-gradient-to-r from-amber-400 to-emerald-400 transition-all duration-300" style="width: 10%;"></div>
+      </div>
+      <div class="ml-2 text-xs font-black text-white drop-shadow"><span id="cam-cur-step">1</span>/10</div>
+    </div>
+
+    <!-- Active Game Badge & Settings -->
+    <div class="flex items-center gap-1 shrink-0">
+      <span id="cam-mode-badge" class="bg-indigo-600/90 text-white font-black text-xs rounded-full px-2.5 py-1.5 shadow border border-indigo-300 hidden sm:inline-flex items-center gap-1">
+        👑 Thẻ Nổi
+      </span>
+      <button id="cam-settings-btn" class="big-btn w-9 h-9 rounded-full bg-white/90 text-slate-700 shadow-lg flex items-center justify-center font-black text-base border border-slate-200">⚙️</button>
+    </div>
+  </div>
+
+  <!-- 5 Mini-Games Switcher Tabs (Always Accessible) -->
+  <div id="cam-modes-bar" class="absolute top-13 inset-x-0 flex items-center justify-center gap-1.5 z-30 px-2 overflow-x-auto no-scrollbar py-1">
+    <button data-cam-mode="classic" class="cam-tab-btn active big-btn px-2.5 py-1 rounded-full text-xs font-black bg-white text-indigo-700 shadow-md border-2 border-indigo-400 shrink-0">👑 Thẻ Nổi</button>
+    <button data-cam-mode="bubble" class="cam-tab-btn big-btn px-2.5 py-1 rounded-full text-xs font-black bg-white/80 text-slate-700 shadow border border-slate-300 shrink-0">🫧 Bong Bóng</button>
+    <button data-cam-mode="mask" class="cam-tab-btn big-btn px-2.5 py-1 rounded-full text-xs font-black bg-white/80 text-slate-700 shadow border border-slate-300 shrink-0">🎭 Hóa Trang</button>
+    <button data-cam-mode="giftbox" class="cam-tab-btn big-btn px-2.5 py-1 rounded-full text-xs font-black bg-white/80 text-slate-700 shadow border border-slate-300 shrink-0">🎁 Hộp Quà</button>
+    <button data-cam-mode="rapid" class="cam-tab-btn big-btn px-2.5 py-1 rounded-full text-xs font-black bg-white/80 text-slate-700 shadow border border-slate-300 shrink-0">⚡ Phản Xạ</button>
+  </div>
+
+  <!-- Live Spoken Toast (Shows What Baby Just Said) -->
+  <div id="cam-speech-toast-wrap" class="absolute top-22 inset-x-0 flex items-center justify-center pointer-events-none z-40 px-3">
+    <div id="cam-speech-toast" class="bg-slate-900/90 backdrop-blur-md text-white text-xs sm:text-sm font-black rounded-full px-4 py-1.5 shadow-2xl border border-sky-400/50 flex items-center gap-2 max-w-[95%] truncate transition-all duration-200">
+      <span id="cam-mic-icon" class="text-base animate-pulse">🎤</span>
+      <span id="cam-speech-toast-text">Bé Mây đang lắng nghe giọng đọc của bé...</span>
+    </div>
+  </div>
+
+  <!-- CENTER STAGE: VÙNG TƯƠNG TÁC AR CHÍNH -->
+  <div class="absolute inset-x-0 top-32 bottom-28 flex flex-col items-center justify-center z-20 px-4 pointer-events-none">
+    
+    <!-- Game Mode 1: Classic Head Card -->
+    <div id="cam-stage-classic" class="cam-game-stage flex flex-col items-center pointer-events-auto">
+      <div class="relative">
+        <div class="sparkle-dot" style="top:-14px;left:-14px;"></div>
+        <div class="sparkle-dot" style="top:20%;right:-20px;"></div>
+        <div class="sparkle-dot" style="bottom:-12px;right:10%;"></div>
+        <div id="cam-classic-card" class="cam-card w-44 h-44 sm:w-52 sm:h-52 bg-white/95 rounded-3xl shadow-2xl border-4 border-sky-300 flex flex-col items-center justify-center p-3 text-center transform transition-all duration-300">
+          <div id="cam-classic-emoji" class="emoji text-7xl sm:text-8xl drop-shadow mascot-bounce">🦁</div>
+          <div id="cam-classic-en" class="text-2xl sm:text-3xl font-black text-sky-700 mt-1">Lion</div>
+          <div id="cam-classic-vi" class="text-xs sm:text-sm font-extrabold text-slate-500">Sư tử</div>
+        </div>
+      </div>
+      <div class="mt-3 flex items-center gap-2">
+        <button id="cam-classic-speak" class="big-btn bg-white/95 text-sky-600 rounded-full px-3.5 py-1.5 text-xs font-black shadow-lg flex items-center gap-1 border border-sky-200">
+          <span>🔊</span> <span>Nghe phát âm</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Game Mode 2: Floating Bubbles Stage -->
+    <div id="cam-stage-bubble" class="cam-game-stage hidden flex flex-col items-center pointer-events-auto">
+      <div class="relative w-56 h-56 flex items-center justify-center">
+        <div id="cam-main-bubble" class="w-48 h-48 rounded-full bg-gradient-to-tr from-sky-400/40 via-purple-300/30 to-pink-300/50 backdrop-blur-sm border-4 border-white/80 shadow-[0_0_30px_rgba(255,255,255,0.7)] flex flex-col items-center justify-center p-3 animate-bounce">
+          <div id="cam-bubble-emoji" class="emoji text-7xl drop-shadow">🍎</div>
+          <div id="cam-bubble-en" class="text-2xl font-black text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Apple</div>
+        </div>
+      </div>
+      <div class="text-center font-extrabold text-white text-xs sm:text-sm drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mt-2">
+        🫧 Bé đọc đúng từ để làm nổ bong bóng thành sao nhé!
+      </div>
+    </div>
+
+    <!-- Game Mode 3: Animal & Sound Mask Stage -->
+    <div id="cam-stage-mask" class="cam-game-stage hidden flex flex-col items-center pointer-events-auto">
+      <div class="relative flex flex-col items-center">
+        <!-- Floating Mask Crown on Baby's Head -->
+        <div id="cam-mask-crown" class="emoji text-6xl sm:text-7xl -mb-4 z-10 animate-bounce">👑</div>
+        <div class="w-48 h-48 rounded-3xl bg-amber-400/90 border-4 border-white shadow-2xl flex flex-col items-center justify-center p-3 text-center">
+          <div id="cam-mask-emoji" class="emoji text-7xl mascot-bounce">🐱</div>
+          <div id="cam-mask-en" class="text-2xl font-black text-slate-900">Cat</div>
+          <div id="cam-mask-hint" class="text-xs font-bold text-amber-950 mt-1 bg-white/80 rounded-full px-2.5 py-0.5">🗣️ Nói "Cat" hoặc kêu "Meow"</div>
+        </div>
+      </div>
+      <div class="mt-2 text-xs font-bold text-white drop-shadow">Bé giả tiếng kêu hoặc đọc tên con vật đều được thưởng sao!</div>
+    </div>
+
+    <!-- Game Mode 4: Magic Mystery Gift Box Stage -->
+    <div id="cam-stage-giftbox" class="cam-game-stage hidden flex flex-col items-center pointer-events-auto">
+      <div class="relative flex flex-col items-center">
+        <div id="cam-gift-box" class="w-48 h-48 rounded-3xl bg-gradient-to-br from-pink-500 to-rose-600 border-4 border-amber-300 shadow-2xl flex flex-col items-center justify-center p-3 text-white text-center cursor-pointer transition-transform duration-300">
+          <div id="cam-gift-emoji" class="emoji text-7xl mascot-bounce">🎁</div>
+          <div id="cam-gift-peek" class="text-xs font-black text-amber-200 mt-1">Đang rung rinh hé mở...</div>
+        </div>
+        <div id="cam-gift-word-box" class="mt-3 bg-white/95 rounded-2xl px-4 py-2 shadow-xl text-center">
+          <div class="text-xs font-bold text-slate-500">Câu thần chú mở hộp:</div>
+          <div id="cam-gift-en" class="text-2xl font-black text-pink-600">Banana</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Mode 5: Rapid Q&A Chat Stage -->
+    <div id="cam-stage-rapid" class="cam-game-stage hidden flex flex-col items-center pointer-events-auto max-w-sm">
+      <div class="speech-bubble bg-white rounded-3xl p-4 shadow-2xl border-4 border-amber-300 flex items-start gap-3 w-full">
+        <div class="emoji text-5xl shrink-0 mascot-bounce">👧</div>
+        <div class="flex-1">
+          <div class="text-xs font-extrabold text-amber-600 flex items-center justify-between">
+            <span>Bé Mây hỏi bé:</span>
+            <span id="cam-rapid-streak" class="bg-amber-100 text-amber-800 rounded-full px-2 py-0.5 font-black text-[11px]">⚡ Streak: x0</span>
+          </div>
+          <div id="cam-rapid-question" class="text-base sm:text-lg font-black text-slate-800 leading-tight mt-1">What sweet fruit is this?</div>
+          <div id="cam-rapid-guide" class="text-xs font-bold text-slate-500 mt-1">Bé trả lời: "Apple"</div>
+        </div>
+      </div>
+      <div class="mt-3 bg-white/90 rounded-2xl p-2.5 shadow-lg flex items-center gap-3">
+        <span id="cam-rapid-emoji" class="emoji text-5xl">🍎</span>
+        <div>
+          <div id="cam-rapid-en" class="text-xl font-black text-sky-700">Apple</div>
+          <div id="cam-rapid-vi" class="text-xs font-bold text-slate-500">Quả táo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Hint Banner (Updates every 5 seconds) -->
+    <div id="cam-dynamic-hint" class="mt-3 bg-black/60 backdrop-blur-md text-amber-300 text-xs sm:text-sm font-extrabold rounded-full px-4 py-1.5 shadow-lg max-w-md text-center border border-amber-400/40">
+      💡 Bé hãy đọc to từ này cùng Bé Mây nhé!
+    </div>
+  </div>
+
+  <!-- BOTTOM HUD: Digital Clock 60.00s + Voice Energy Bar + Parent Pass Button -->
+  <div class="absolute bottom-0 inset-x-0 px-3 pb-3 pt-2 flex flex-col items-center gap-2 z-30 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+    <div class="flex items-center justify-center gap-3 w-full max-w-md">
+      
+      <!-- Digital Green Clock -->
+      <div class="flex items-center bg-slate-900/90 border-2 border-emerald-400 rounded-2xl px-3 py-1.5 shadow-lg">
+        <span class="emoji text-xl mr-1.5">⏱️</span>
+        <span id="cam-digital-timer" class="font-mono-digital text-2xl sm:text-3xl text-emerald-400 font-bold tracking-wider">60.00s</span>
+      </div>
+
+      <!-- VOICE ENERGY BAR (AudioContext Analyser Visualizer) -->
+      <div class="flex items-center gap-1 bg-slate-900/90 border-2 border-sky-400 rounded-2xl px-3 py-2 shadow-lg h-12" title="Cột sóng âm thanh giọng đọc của bé">
+        <span class="emoji text-sm text-sky-400 mr-1">🎙️</span>
+        <div id="voice-energy-bar" class="flex items-end gap-1 h-7 w-20">
+          <div class="ve-col w-2.5 bg-emerald-400 rounded-sm transition-all duration-75" style="height: 15%;"></div>
+          <div class="ve-col w-2.5 bg-emerald-400 rounded-sm transition-all duration-75" style="height: 20%;"></div>
+          <div class="ve-col w-2.5 bg-amber-400 rounded-sm transition-all duration-75" style="height: 15%;"></div>
+          <div class="ve-col w-2.5 bg-amber-400 rounded-sm transition-all duration-75" style="height: 25%;"></div>
+          <div class="ve-col w-2.5 bg-rose-400 rounded-sm transition-all duration-75" style="height: 15%;"></div>
+          <div class="ve-col w-2.5 bg-rose-400 rounded-sm transition-all duration-75" style="height: 10%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parent Assist Pass Button (Trợ giúp nhanh cho bé 3 tuổi phát âm ngọng) -->
+    <div class="flex items-center gap-2">
+      <button id="btn-parent-pass" class="big-btn bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-extrabold text-xs sm:text-sm rounded-full px-5 py-2 shadow-xl border-2 border-white flex items-center gap-1.5">
+        <span>👍</span> <span>Bố Mẹ: Bé đọc đúng (+1 ⭐)</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Results Modal -->
+  <div id="cam-results" class="hidden absolute inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
+    <div class="bounce-in bg-white rounded-3xl shadow-2xl w-full max-w-sm p-6 text-center border-4 border-sky-200">
+      <div class="emoji text-7xl mascot-bounce">👧</div>
+      <h3 class="text-2xl font-black text-pink-500 mt-2">🎉 Bé Hoàn Thành Xuất Sắc!</h3>
+      <p id="cam-results-msg" class="font-bold text-slate-500 text-sm">"Awesome superstar!"</p>
+      <div class="grid grid-cols-2 gap-3 my-4">
+        <div class="bg-emerald-50 rounded-2xl p-3 border border-emerald-200">
+          <div class="text-xs font-bold text-emerald-600">Đọc đúng</div>
+          <div id="cam-res-score" class="text-3xl font-black text-emerald-600">10/10</div>
+        </div>
+        <div class="bg-sky-50 rounded-2xl p-3 border border-sky-200">
+          <div class="text-xs font-bold text-sky-600">Thời gian</div>
+          <div id="cam-res-time" class="text-3xl font-black text-sky-600 font-mono-digital">28.4s</div>
+        </div>
+      </div>
+      <div class="emoji text-4xl my-2">⭐⭐⭐</div>
+      <p class="font-bold text-slate-600 text-sm mb-4">Bé Mây tặng bé 3 ngôi sao vàng rực rỡ!</p>
+      <div class="flex flex-col gap-2.5">
+        <button id="cam-btn-replay" class="big-btn bg-gradient-to-r from-sky-400 to-indigo-500 text-white font-black rounded-2xl py-3.5 text-base shadow-lg">🔄 Chơi 10 Hình Mới</button>
+        <button id="cam-btn-home" class="big-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-black rounded-2xl py-3 shadow">🏠 Về Bản Đồ Học</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1787,8 +2041,937 @@ function saveAdminSettings() {
   alert("✅ Đã lưu cấu hình Admin thành công!");
 }
 
+
+/* =====================================================================
+   KHO TỪ VỰNG MỞ RỘNG MẦM NON (150+ TỪ VỰNG CHUẨN)
+   Bao gồm 120 từ trong 30 bài học + Kho từ mở rộng các chủ đề:
+   Động vật, Trái cây, Màu sắc, Phương tiện, Đồ vật, Hành động...
+   ===================================================================== */
+const EXPANDED_VOCABULARY_POOL = [
+  // Động vật (Animals)
+  { en: "Lion", vi: "Sư tử", emoji: "🦁", category: "animal", soundText: "Roar", aliases: ["lion", "the lion", "sư tử", "roar", "roarr"], cue: "King of the jungle!", bg: "#FEF3C7" },
+  { en: "Tiger", vi: "Hổ vằn", emoji: "🐯", category: "animal", soundText: "Roar", aliases: ["tiger", "the tiger", "hổ", "roar"], cue: "Striped big cat!", bg: "#FFEDD5" },
+  { en: "Cat", vi: "Con mèo", emoji: "🐱", category: "animal", soundText: "Meow", aliases: ["cat", "kitty", "the cat", "mèo", "meow", "meo"], cue: "Says meow meow!", bg: "#FCE7F3" },
+  { en: "Dog", vi: "Con chó", emoji: "🐶", category: "animal", soundText: "Woof", aliases: ["dog", "puppy", "the dog", "chó", "woof", "gâu"], cue: "Best loyal friend!", bg: "#FEF08A" },
+  { en: "Elephant", vi: "Con voi", emoji: "🐘", category: "animal", soundText: "Pawoo", aliases: ["elephant", "the elephant", "voi", "pawoo"], cue: "Has a long trunk!", bg: "#E0E7FF" },
+  { en: "Monkey", vi: "Con khỉ", emoji: "🐵", category: "animal", soundText: "Ooh ooh aah aah", aliases: ["monkey", "khỉ", "ooh"], cue: "Loves bananas!", bg: "#FEF3C7" },
+  { en: "Duck", vi: "Con vịt", emoji: "🦆", category: "animal", soundText: "Quack", aliases: ["duck", "the duck", "vịt", "quack", "quạc"], cue: "Swims in the pond!", bg: "#CCFBF1" },
+  { en: "Cow", vi: "Con bò", emoji: "🐮", category: "animal", soundText: "Moo", aliases: ["cow", "the cow", "bò", "moo"], cue: "Gives sweet milk!", bg: "#F1F5F9" },
+  { en: "Pig", vi: "Con lợn", emoji: "🐷", category: "animal", soundText: "Oink", aliases: ["pig", "piggy", "heo", "lợn", "oink"], cue: "Cute pink nose!", bg: "#FCE7F3" },
+  { en: "Frog", vi: "Con ếch", emoji: "🐸", category: "animal", soundText: "Ribbit", aliases: ["frog", "ếch", "ribbit"], cue: "Jumps hop hop!", bg: "#DCFCE7" },
+  { en: "Bear", vi: "Con gấu", emoji: "🐻", category: "animal", soundText: "Grrr", aliases: ["bear", "gấu", "grr"], cue: "Big and cuddly!", bg: "#FED7AA" },
+  { en: "Rabbit", vi: "Con thỏ", emoji: "🐰", category: "animal", soundText: "Hop hop", aliases: ["rabbit", "bunny", "thỏ", "hop"], cue: "Long soft ears!", bg: "#F3E8FF" },
+  { en: "Sheep", vi: "Con cừu", emoji: "🐑", category: "animal", soundText: "Baa", aliases: ["sheep", "cừu", "baa"], cue: "Fluffy white wool!", bg: "#F8FAFC" },
+  { en: "Horse", vi: "Con ngựa", emoji: "🐴", category: "animal", soundText: "Neigh", aliases: ["horse", "ngựa", "neigh"], cue: "Runs super fast!", bg: "#FEF3C7" },
+  { en: "Panda", vi: "Gấu trúc", emoji: "🐼", category: "animal", soundText: "Munch", aliases: ["panda", "gấu trúc"], cue: "Black and white!", bg: "#F1F5F9" },
+  { en: "Zebra", vi: "Ngựa vằn", emoji: "🦓", category: "animal", soundText: "Neigh", aliases: ["zebra", "ngựa vằn"], cue: "Black and white stripes!", bg: "#E2E8F0" },
+  { en: "Bird", vi: "Con chim", emoji: "🐦", category: "animal", soundText: "Tweet", aliases: ["bird", "chim", "tweet"], cue: "Flies in the sky!", bg: "#CFFAFE" },
+  { en: "Fish", vi: "Con cá", emoji: "🐟", category: "animal", soundText: "Blub blub", aliases: ["fish", "cá", "blub"], cue: "Swims in water!", bg: "#BAE6FD" },
+  { en: "Bee", vi: "Con ong", emoji: "🐝", category: "animal", soundText: "Bzz", aliases: ["bee", "ong", "bzz"], cue: "Makes sweet honey!", bg: "#FEF08A" },
+  { en: "Butterfly", vi: "Con bướm", emoji: "🦋", category: "animal", soundText: "Flutter", aliases: ["butterfly", "bướm"], cue: "Colorful wings!", bg: "#E0E7FF" },
+
+  // Trái cây & Đồ ăn (Fruits & Food)
+  { en: "Apple", vi: "Quả táo", emoji: "🍎", category: "fruit", soundText: "Crunch", aliases: ["apple", "the apple", "táo", "crunch"], cue: "Sweet red fruit!", bg: "#FEE2E2" },
+  { en: "Banana", vi: "Quả chuối", emoji: "🍌", category: "fruit", soundText: "Yum", aliases: ["banana", "chuối", "yum"], cue: "Yellow and sweet!", bg: "#FEF08A" },
+  { en: "Orange", vi: "Quả cam", emoji: "🍊", category: "fruit", soundText: "Juicy", aliases: ["orange", "cam", "juicy"], cue: "Juicy citrus!", bg: "#FFEDD5" },
+  { en: "Strawberry", vi: "Dâu tây", emoji: "🍓", category: "fruit", soundText: "Sweet", aliases: ["strawberry", "dâu tây", "dâu"], cue: "Sweet and red!", bg: "#FCE7F3" },
+  { en: "Watermelon", vi: "Dưa hấu", emoji: "🍉", category: "fruit", soundText: "Slurp", aliases: ["watermelon", "dưa hấu"], cue: "Green outside red inside!", bg: "#DCFCE7" },
+  { en: "Grapes", vi: "Nho", emoji: "🍇", category: "fruit", soundText: "Pop", aliases: ["grapes", "grape", "nho"], cue: "Bunch of purple balls!", bg: "#F3E8FF" },
+  { en: "Mango", vi: "Quả xoài", emoji: "🥭", category: "fruit", soundText: "Yummy", aliases: ["mango", "xoài"], cue: "Tropical sweet fruit!", bg: "#FEF08A" },
+  { en: "Milk", vi: "Sữa", emoji: "🥛", category: "fruit", soundText: "Slurp", aliases: ["milk", "sữa"], cue: "Healthy white drink!", bg: "#F8FAFC" },
+  { en: "Bread", vi: "Bánh mì", emoji: "🍞", category: "fruit", soundText: "Bite", aliases: ["bread", "bánh mì"], cue: "Warm and soft!", bg: "#FEF3C7" },
+  { en: "Egg", vi: "Quả trứng", emoji: "🥚", category: "fruit", soundText: "Crack", aliases: ["egg", "trứng"], cue: "Round oval egg!", bg: "#FEF9C3" },
+  { en: "Cake", vi: "Bánh kem", emoji: "🎂", category: "fruit", soundText: "Yum", aliases: ["cake", "bánh", "bánh kem"], cue: "Birthday cake!", bg: "#FCE7F3" },
+  { en: "Ice cream", vi: "Kem", emoji: "🍦", category: "fruit", soundText: "Lick", aliases: ["ice cream", "kem"], cue: "Cold and yummy!", bg: "#CFFAFE" },
+  { en: "Cookie", vi: "Bánh quy", emoji: "🍪", category: "fruit", soundText: "Crunch", aliases: ["cookie", "bánh quy"], cue: "Sweet chocolate chips!", bg: "#FEF3C7" },
+  { en: "Pizza", vi: "Bánh pizza", emoji: "🍕", category: "fruit", soundText: "Cheesy", aliases: ["pizza"], cue: "Cheesy slice!", bg: "#FFEDD5" },
+  { en: "Carrot", vi: "Cà rốt", emoji: "🥕", category: "fruit", soundText: "Crunch", aliases: ["carrot", "cà rốt"], cue: "Orange crunchy veggie!", bg: "#FFEDD5" },
+  { en: "Corn", vi: "Bắp ngô", emoji: "🌽", category: "fruit", soundText: "Pop", aliases: ["corn", "bắp", "ngô"], cue: "Yellow sweet corn!", bg: "#FEF08A" },
+
+  // Màu sắc (Colors)
+  { en: "Red", vi: "Màu đỏ", emoji: "🔴", category: "color", soundText: "Bright red", aliases: ["red", "đỏ", "màu đỏ"], cue: "Color of hearts and apples!", bg: "#FEE2E2" },
+  { en: "Blue", vi: "Màu xanh dương", emoji: "🔵", category: "color", soundText: "Deep blue", aliases: ["blue", "xanh dương", "màu xanh"], cue: "Color of the ocean sky!", bg: "#DBEAFE" },
+  { en: "Yellow", vi: "Màu vàng", emoji: "🟡", category: "color", soundText: "Sunny yellow", aliases: ["yellow", "vàng", "màu vàng"], cue: "Color of the sun!", bg: "#FEF08A" },
+  { en: "Green", vi: "Màu xanh lá", emoji: "🟢", category: "color", soundText: "Fresh green", aliases: ["green", "xanh lá"], cue: "Color of tree leaves!", bg: "#DCFCE7" },
+  { en: "Pink", vi: "Màu hồng", emoji: "🌸", category: "color", soundText: "Pretty pink", aliases: ["pink", "hồng", "màu hồng"], cue: "Color of sweet flowers!", bg: "#FCE7F3" },
+  { en: "Purple", vi: "Màu tím", emoji: "🟣", category: "color", soundText: "Magic purple", aliases: ["purple", "tím", "màu tím"], cue: "Color of magic!", bg: "#F3E8FF" },
+  { en: "Orange color", vi: "Màu cam", emoji: "🟠", category: "color", soundText: "Warm orange", aliases: ["orange", "màu cam", "cam"], cue: "Bright warm color!", bg: "#FFEDD5" },
+  { en: "White", vi: "Màu trắng", emoji: "⚪", category: "color", soundText: "Pure white", aliases: ["white", "trắng", "màu trắng"], cue: "Color of fluffy snow!", bg: "#F8FAFC" },
+  { en: "Black", vi: "Màu đen", emoji: "⚫", category: "color", soundText: "Night black", aliases: ["black", "đen", "màu đen"], cue: "Color of the night sky!", bg: "#E2E8F0" },
+
+  // Phương tiện giao thông (Vehicles)
+  { en: "Car", vi: "Xe hơi", emoji: "🚗", category: "vehicle", soundText: "Brum brum", aliases: ["car", "the car", "xe hơi", "ô tô", "brum"], cue: "Drives on the road!", bg: "#FEE2E2" },
+  { en: "Bus", vi: "Xe buýt", emoji: "🚌", category: "vehicle", soundText: "Beep beep", aliases: ["bus", "the bus", "xe buýt", "beep"], cue: "Big yellow bus!", bg: "#FEF08A" },
+  { en: "Train", vi: "Tàu hỏa", emoji: "🚂", category: "vehicle", soundText: "Choo choo", aliases: ["train", "the train", "tàu hỏa", "choo"], cue: "Runs on tracks!", bg: "#E0E7FF" },
+  { en: "Plane", vi: "Máy bay", emoji: "✈️", category: "vehicle", soundText: "Whoosh", aliases: ["plane", "airplane", "máy bay", "whoosh"], cue: "Flies high above clouds!", bg: "#CFFAFE" },
+  { en: "Boat", vi: "Con thuyền", emoji: "⛵", category: "vehicle", soundText: "Splash", aliases: ["boat", "thuyền", "tàu"], cue: "Sails on the blue sea!", bg: "#BAE6FD" },
+  { en: "Bike", vi: "Xe đạp", emoji: "🚲", category: "vehicle", soundText: "Ring ring", aliases: ["bike", "bicycle", "xe đạp"], cue: "Two round wheels!", bg: "#DCFCE7" },
+  { en: "Truck", vi: "Xe tải", emoji: "🚛", category: "vehicle", soundText: "Honk honk", aliases: ["truck", "xe tải"], cue: "Carries heavy boxes!", bg: "#FEF3C7" },
+  { en: "Helicopter", vi: "Trực thăng", emoji: "🚁", category: "vehicle", soundText: "Chop chop", aliases: ["helicopter", "trực thăng"], cue: "Spinning propeller!", bg: "#FCE7F3" },
+  { en: "Rocket", vi: "Tên lửa", emoji: "🚀", category: "vehicle", soundText: "Blast off", aliases: ["rocket", "tên lửa"], cue: "Flies to the moon!", bg: "#EDE9FE" },
+
+  // Đồ vật quen thuộc (Objects & Toys)
+  { en: "Ball", vi: "Quả bóng", emoji: "⚽", category: "object", soundText: "Bounce", aliases: ["ball", "bóng", "quả bóng", "bounce"], cue: "Bounces up and down!", bg: "#F1F5F9" },
+  { en: "Doll", vi: "Búp bê", emoji: "🪆", category: "object", soundText: "Hello", aliases: ["doll", "búp bê"], cue: "Cute playmate!", bg: "#FCE7F3" },
+  { en: "Book", vi: "Quyển sách", emoji: "📖", category: "object", soundText: "Flip", aliases: ["book", "sách"], cue: "Full of magic stories!", bg: "#DBEAFE" },
+  { en: "Box", vi: "Cái hộp", emoji: "📦", category: "object", soundText: "Open", aliases: ["box", "hộp"], cue: "Holds secret treasures!", bg: "#FEF3C7" },
+  { en: "Chair", vi: "Cái ghế", emoji: "🪑", category: "object", soundText: "Sit", aliases: ["chair", "ghế"], cue: "Sit down comfortably!", bg: "#FEF08A" },
+  { en: "Table", vi: "Cái bàn", emoji: "🪵", category: "object", soundText: "Tap tap", aliases: ["table", "bàn"], cue: "Put things on top!", bg: "#FFEDD5" },
+  { en: "Bed", vi: "Cái giường", emoji: "🛏️", category: "object", soundText: "Sleep", aliases: ["bed", "giường"], cue: "Soft place to dream!", bg: "#E0E7FF" },
+  { en: "Clock", vi: "Đồng hồ", emoji: "⏰", category: "object", soundText: "Tick tock", aliases: ["clock", "đồng hồ", "tick"], cue: "Tells the time!", bg: "#FEE2E2" },
+  { en: "Bell", vi: "Cái chuông", emoji: "🔔", category: "object", soundText: "Ding dong", aliases: ["bell", "chuông", "ding"], cue: "Rings ding dong!", bg: "#FEF08A" },
+  { en: "Hat", vi: "Cái mũ", emoji: "🧢", category: "object", soundText: "Fit", aliases: ["hat", "cap", "mũ", "nón"], cue: "Worn on your head!", bg: "#BAE6FD" },
+  { en: "Shoe", vi: "Đôi giày", emoji: "👟", category: "object", soundText: "Step step", aliases: ["shoe", "shoes", "giày"], cue: "Put on your feet!", bg: "#DCFCE7" },
+  { en: "Cup", vi: "Cái cốc", emoji: "🥛", category: "object", soundText: "Sip", aliases: ["cup", "cốc", "ly"], cue: "Drink fresh water!", bg: "#E0E7FF" },
+  { en: "Umbrella", vi: "Cái ô", emoji: "☂️", category: "object", soundText: "Rain drops", aliases: ["umbrella", "cái ô", "cái dù"], cue: "Keeps you dry in rain!", bg: "#F3E8FF" },
+
+  // Thiên nhiên (Nature)
+  { en: "Sun", vi: "Mặt trời", emoji: "☀️", category: "nature", soundText: "Shine", aliases: ["sun", "mặt trời", "shine"], cue: "Bright and warm in the sky!", bg: "#FEF08A" },
+  { en: "Moon", vi: "Mặt trăng", emoji: "🌙", category: "nature", soundText: "Glow", aliases: ["moon", "mặt trăng"], cue: "Shines at night!", bg: "#FEF3C7" },
+  { en: "Star", vi: "Ngôi sao", emoji: "⭐", category: "nature", soundText: "Twinkle", aliases: ["star", "ngôi sao", "twinkle"], cue: "Twinkles high above!", bg: "#FEF08A" },
+  { en: "Cloud", vi: "Đám mây", emoji: "☁️", category: "nature", soundText: "Float", aliases: ["cloud", "đám mây", "mây"], cue: "Fluffy like cotton!", bg: "#F1F5F9" },
+  { en: "Rain", vi: "Cơn mưa", emoji: "🌧️", category: "nature", soundText: "Pitter patter", aliases: ["rain", "mưa"], cue: "Water falling from sky!", bg: "#CFFAFE" },
+  { en: "Rainbow", vi: "Cầu vồng", emoji: "🌈", category: "nature", soundText: "Colors", aliases: ["rainbow", "cầu vồng"], cue: "Seven pretty colors!", bg: "#FCE7F3" },
+  { en: "Flower", vi: "Bông hoa", emoji: "🌸", category: "nature", soundText: "Bloom", aliases: ["flower", "bông hoa", "hoa"], cue: "Smells sweet!", bg: "#FCE7F3" },
+  { en: "Tree", vi: "Cái cây", emoji: "🌳", category: "nature", soundText: "Rustle", aliases: ["tree", "cây"], cue: "Tall and green!", bg: "#DCFCE7" },
+
+  // Cơ thể & Hành động (Body & Actions)
+  { en: "Eye", vi: "Mắt", emoji: "👀", category: "body", soundText: "Blink", aliases: ["eye", "eyes", "mắt"], cue: "Used to see the world!", bg: "#DBEAFE" },
+  { en: "Nose", vi: "Mũi", emoji: "👃", category: "body", soundText: "Sniff", aliases: ["nose", "mũi"], cue: "Used to smell flowers!", bg: "#FEF3C7" },
+  { en: "Ear", vi: "Tai", emoji: "👂", category: "body", soundText: "Hear", aliases: ["ear", "ears", "tai"], cue: "Used to hear music!", bg: "#FCE7F3" },
+  { en: "Mouth", vi: "Miệng", emoji: "👄", category: "body", soundText: "Smile", aliases: ["mouth", "miệng"], cue: "Used to smile and talk!", bg: "#FEE2E2" },
+  { en: "Hand", vi: "Bàn tay", emoji: "✋", category: "body", soundText: "High five", aliases: ["hand", "hands", "tay"], cue: "Give a high five!", bg: "#FEF08A" },
+  { en: "Foot", vi: "Bàn chân", emoji: "🦶", category: "body", soundText: "Stomp", aliases: ["foot", "feet", "chân"], cue: "Used to run and jump!", bg: "#E2E8F0" },
+  { en: "Jump", vi: "Nhảy", emoji: "🦘", category: "action", soundText: "Hop", aliases: ["jump", "nhảy", "hop"], cue: "Jump up high!", bg: "#DCFCE7" },
+  { en: "Run", vi: "Chạy", emoji: "🏃", category: "action", soundText: "Zoom", aliases: ["run", "chạy"], cue: "Run like the wind!", bg: "#FEF3C7" },
+  { en: "Clap", vi: "Vỗ tay", emoji: "👏", category: "action", soundText: "Clap clap", aliases: ["clap", "vỗ tay"], cue: "Clap your hands!", bg: "#FEF08A" },
+  { en: "Sleep", vi: "Ngủ", emoji: "😴", category: "action", soundText: "Zzz", aliases: ["sleep", "ngủ", "zzz"], cue: "Close your eyes to sleep!", bg: "#EDE9FE" },
+  { en: "Circle", vi: "Hình tròn", emoji: "🔴", category: "shape", soundText: "Round round", aliases: ['circle', 'hình tròn', 'tròn'], cue: "Round like a ball!", bg: "#FEF3C7" },
+  { en: "Square", vi: "Hình vuông", emoji: "🟧", category: "shape", soundText: "Four sides", aliases: ['square', 'hình vuông', 'vuông'], cue: "Four equal sides!", bg: "#FEF3C7" },
+  { en: "Triangle", vi: "Hình tam giác", emoji: "🔺", category: "shape", soundText: "Three points", aliases: ['triangle', 'hình tam giác', 'tam giác'], cue: "Three sharp points!", bg: "#FEF3C7" },
+  { en: "Heart", vi: "Hình trái tim", emoji: "❤️", category: "shape", soundText: "Thump thump", aliases: ['heart', 'trái tim', 'tim'], cue: "Full of love!", bg: "#FEF3C7" },
+  { en: "Diamond", vi: "Hình thoi", emoji: "💎", category: "shape", soundText: "Sparkle", aliases: ['diamond', 'kim cương', 'hình thoi'], cue: "Sparkles like a gem!", bg: "#FEF3C7" },
+  { en: "Oval", vi: "Hình bầu dục", emoji: "🥚", category: "shape", soundText: "Egg shape", aliases: ['oval', 'hình bầu dục'], cue: "Shaped like an egg!", bg: "#FEF3C7" },
+  { en: "Giraffe", vi: "Hươu cao cổ", emoji: "🦒", category: "animal", soundText: "Munch leaves", aliases: ['giraffe', 'hươu cao cổ'], cue: "Tallest friend with long neck!", bg: "#FEF3C7" },
+  { en: "Hippo", vi: "Hà mã", emoji: "🦛", category: "animal", soundText: "Big splash", aliases: ['hippo', 'hà mã'], cue: "Loves splashing in water!", bg: "#FEF3C7" },
+  { en: "Kangaroo", vi: "Chuột túi", emoji: "🦘", category: "animal", soundText: "Boing boing", aliases: ['kangaroo', 'chuột túi', 'boing'], cue: "Hops with a pouch!", bg: "#FEF3C7" },
+  { en: "Koala", vi: "Gấu túi", emoji: "🐨", category: "animal", soundText: "Yawn", aliases: ['koala', 'gấu túi'], cue: "Sleeps in eucalyptus trees!", bg: "#FEF3C7" },
+  { en: "Dolphin", vi: "Cá heo", emoji: "🐬", category: "animal", soundText: "Click click", aliases: ['dolphin', 'cá heo'], cue: "Friendly ocean swimmer!", bg: "#FEF3C7" },
+  { en: "Whale", vi: "Cá voi", emoji: "🐋", category: "animal", soundText: "Whoosh water", aliases: ['whale', 'cá voi'], cue: "Giant of the deep blue sea!", bg: "#FEF3C7" },
+  { en: "Shark", vi: "Cá mập", emoji: "🦈", category: "animal", soundText: "Chomp chomp", aliases: ['shark', 'cá mập', 'chomp'], cue: "Fast swimmer with fins!", bg: "#FEF3C7" },
+  { en: "Octopus", vi: "Bạch tuộc", emoji: "🐙", category: "animal", soundText: "Eight arms", aliases: ['octopus', 'bạch tuộc'], cue: "Has eight wiggly arms!", bg: "#FEF3C7" },
+  { en: "Turtle", vi: "Con rùa", emoji: "🐢", category: "animal", soundText: "Slow slow", aliases: ['turtle', 'rùa'], cue: "Carries a strong shell!", bg: "#FEF3C7" },
+  { en: "Penguin", vi: "Chim cánh cụt", emoji: "🐧", category: "animal", soundText: "Waddle waddle", aliases: ['penguin', 'chim cánh cụt'], cue: "Waddles on ice!", bg: "#FEF3C7" },
+  { en: "Owl", vi: "Con cú mèo", emoji: "🦉", category: "animal", soundText: "Hoo hoo", aliases: ['owl', 'cú mèo', 'cú', 'hoo'], cue: "Big eyes in the night!", bg: "#FEF3C7" },
+  { en: "Flamingo", vi: "Hồng hạc", emoji: "🦩", category: "animal", soundText: "Flap flap", aliases: ['flamingo', 'hồng hạc'], cue: "Pretty pink feathers!", bg: "#FEF3C7" },
+  { en: "Bat", vi: "Con dơi", emoji: "🦇", category: "animal", soundText: "Flap", aliases: ['bat', 'con dơi', 'dơi'], cue: "Flies upside down!", bg: "#FEF3C7" },
+  { en: "Duckling", vi: "Vịt con", emoji: "🐥", category: "animal", soundText: "Peep peep", aliases: ['duckling', 'vịt con', 'peep'], cue: "Tiny yellow baby bird!", bg: "#FEF3C7" },
+  { en: "Chicks", vi: "Gà con", emoji: "🐣", category: "animal", soundText: "Cheep cheep", aliases: ['chick', 'chicks', 'gà con'], cue: "Hatching from shell!", bg: "#FEF3C7" },
+  { en: "Rooster", vi: "Gà trống", emoji: "🐓", category: "animal", soundText: "Cock-a-doodle-doo", aliases: ['rooster', 'gà trống', 'ò ó o'], cue: "Wakes up the morning!", bg: "#FEF3C7" },
+  { en: "Pear", vi: "Quả lê", emoji: "🍐", category: "fruit", soundText: "Crunchy", aliases: ['pear', 'quả lê', 'lê'], cue: "Juicy green fruit!", bg: "#FEF3C7" },
+  { en: "Peach", vi: "Quả đào", emoji: "🍑", category: "fruit", soundText: "Sweet peach", aliases: ['peach', 'quả đào', 'đào'], cue: "Fuzzy sweet fruit!", bg: "#FEF3C7" },
+  { en: "Cherry", vi: "Quả anh đào", emoji: "🍒", category: "fruit", soundText: "Pop cherry", aliases: ['cherry', 'anh đào', 'sơ ri'], cue: "Pair of red berries!", bg: "#FEF3C7" },
+  { en: "Pineapple", vi: "Quả dứa", emoji: "🍍", category: "fruit", soundText: "Tropical", aliases: ['pineapple', 'quả dứa', 'thơm', 'khóm'], cue: "Spiky sweet crown!", bg: "#FEF3C7" },
+  { en: "Coconut", vi: "Quả dừa", emoji: "🥥", category: "fruit", soundText: "Slurp water", aliases: ['coconut', 'quả dừa', 'dừa'], cue: "Cool tropical water!", bg: "#FEF3C7" },
+  { en: "Lemon", vi: "Quả chanh", emoji: "🍋", category: "fruit", soundText: "Sour sour", aliases: ['lemon', 'chanh', 'chua'], cue: "Sour yellow citrus!", bg: "#FEF3C7" },
+  { en: "Avocado", vi: "Quả bơ", emoji: "🥑", category: "fruit", soundText: "Creamy", aliases: ['avocado', 'quả bơ', 'bơ'], cue: "Creamy green superfood!", bg: "#FEF3C7" },
+  { en: "Tomato", vi: "Cà chua", emoji: "🍅", category: "fruit", soundText: "Juicy", aliases: ['tomato', 'cà chua'], cue: "Round red salad fruit!", bg: "#FEF3C7" },
+  { en: "Potato", vi: "Khoai tây", emoji: "🥔", category: "fruit", soundText: "Mash", aliases: ['potato', 'khoai tây'], cue: "Yummy french fries!", bg: "#FEF3C7" },
+  { en: "Mushroom", vi: "Cây nấm", emoji: "🍄", category: "fruit", soundText: "Little cap", aliases: ['mushroom', 'nấm'], cue: "Red cap with dots!", bg: "#FEF3C7" },
+  { en: "Cheese", vi: "Phô mai", emoji: "🧀", category: "fruit", soundText: "Cheesy", aliases: ['cheese', 'phô mai'], cue: "Mouse loves this yellow treat!", bg: "#FEF3C7" },
+  { en: "Honey", vi: "Mật ong", emoji: "🍯", category: "fruit", soundText: "Sweet sweet", aliases: ['honey', 'mật ong'], cue: "Sweet honey pot!", bg: "#FEF3C7" },
+  { en: "Soup", vi: "Bát súp", emoji: "🍲", category: "fruit", soundText: "Slurp warm", aliases: ['soup', 'súp', 'canh'], cue: "Warm delicious bowl!", bg: "#FEF3C7" },
+  { en: "Noodles", vi: "Mì", emoji: "🍜", category: "fruit", soundText: "Slurp slurp", aliases: ['noodles', 'mì', 'phở'], cue: "Long yummy noodles!", bg: "#FEF3C7" },
+  { en: "Donut", vi: "Bánh rán", emoji: "🍩", category: "fruit", soundText: "Sweet glaze", aliases: ['donut', 'bánh donut'], cue: "Round with sweet sprinkles!", bg: "#FEF3C7" },
+  { en: "Juice", vi: "Nước trái cây", emoji: "🧃", category: "fruit", soundText: "Sip sip", aliases: ['juice', 'nước cam', 'nước ép'], cue: "Refreshing fruity drink!", bg: "#FEF3C7" },
+  { en: "Submarine", vi: "Tàu ngầm", emoji: "🪙", category: "vehicle", soundText: "Dive dive", aliases: ['submarine', 'tàu ngầm'], cue: "Dives deep in the ocean!", bg: "#FEF3C7" },
+  { en: "Motorcycle", vi: "Xe mô tô", emoji: "🏍️", category: "vehicle", soundText: "Vroom vroom", aliases: ['motorcycle', 'xe máy', 'mô tô'], cue: "Two wheels vroom!", bg: "#FEF3C7" },
+  { en: "Scooter", vi: "Xe scooter", emoji: "🛴", category: "vehicle", soundText: "Kick roll", aliases: ['scooter', 'xe trượt'], cue: "Push with your foot!", bg: "#FEF3C7" },
+  { en: "Fire truck", vi: "Xe cứu hỏa", emoji: "🚒", category: "vehicle", soundText: "Wee woo", aliases: ['fire truck', 'xe cứu hỏa', 'wee woo'], cue: "Red truck with siren!", bg: "#FEF3C7" },
+  { en: "Police car", vi: "Xe cảnh sát", emoji: "🚓", category: "vehicle", soundText: "Sirens", aliases: ['police car', 'xe cảnh sát'], cue: "Protects our town!", bg: "#FEF3C7" },
+  { en: "Ambulance", vi: "Xe cứu thương", emoji: "🚑", category: "vehicle", soundText: "Wee woo", aliases: ['ambulance', 'xe cứu thương'], cue: "Helps sick people!", bg: "#FEF3C7" },
+  { en: "Taxi", vi: "Xe taxi", emoji: "🚕", category: "vehicle", soundText: "Beep beep", aliases: ['taxi', 'xe taxi'], cue: "Yellow city ride!", bg: "#FEF3C7" },
+  { en: "Tractor", vi: "Máy kéo", emoji: "🚜", category: "vehicle", soundText: "Chug chug", aliases: ['tractor', 'máy kéo'], cue: "Works on the farm!", bg: "#FEF3C7" },
+  { en: "Shirt", vi: "Áo sơ mi", emoji: "👕", category: "object", soundText: "Put on", aliases: ['shirt', 'áo'], cue: "Button up nicely!", bg: "#FEF3C7" },
+  { en: "Pants", vi: "Quần dài", emoji: "👖", category: "object", soundText: "Zip up", aliases: ['pants', 'quần'], cue: "Comfortable pants!", bg: "#FEF3C7" },
+  { en: "Dress", vi: "Váy đầm", emoji: "👗", category: "object", soundText: "Twirl", aliases: ['dress', 'váy', 'đầm'], cue: "Twirl around happily!", bg: "#FEF3C7" },
+  { en: "Socks", vi: "Đôi tất", emoji: "🧦", category: "object", soundText: "Warm feet", aliases: ['socks', 'tất', 'vớ'], cue: "Keeps toes warm!", bg: "#FEF3C7" },
+  { en: "Glasses", vi: "Kính mắt", emoji: "👓", category: "object", soundText: "Look clear", aliases: ['glasses', 'kính'], cue: "Helps you see clearly!", bg: "#FEF3C7" },
+  { en: "Backpack", vi: "Cặp sách", emoji: "🎒", category: "object", soundText: "Pack pack", aliases: ['backpack', 'cặp sách', 'ba lô'], cue: "Carry books to school!", bg: "#FEF3C7" },
+  { en: "Pencil", vi: "Bút chì", emoji: "✏️", category: "object", soundText: "Scribble", aliases: ['pencil', 'bút chì', 'bút'], cue: "Draw pretty pictures!", bg: "#FEF3C7" },
+  { en: "Crayon", vi: "Bút màu sáp", emoji: "🖍️", category: "object", soundText: "Coloring", aliases: ['crayon', 'bút màu'], cue: "Color your world!", bg: "#FEF3C7" },
+  { en: "Scissors", vi: "Cái kéo", emoji: "✂️", category: "object", soundText: "Snip snip", aliases: ['scissors', 'kéo'], cue: "Snip snip craft paper!", bg: "#FEF3C7" },
+  { en: "Toothbrush", vi: "Bàn chải", emoji: "🪥", category: "object", soundText: "Brush brush", aliases: ['toothbrush', 'bàn chải'], cue: "Brush teeth clean!", bg: "#FEF3C7" },
+  { en: "Soap", vi: "Bánh xà phòng", emoji: "🧼", category: "object", soundText: "Bubbles", aliases: ['soap', 'xà phòng', 'xà bông'], cue: "Wash hands bubbly clean!", bg: "#FEF3C7" },
+  { en: "Towel", vi: "Khăn tắm", emoji: "🧖", category: "object", soundText: "Dry dry", aliases: ['towel', 'khăn'], cue: "Soft and dry!", bg: "#FEF3C7" },
+  { en: "Pillow", vi: "Chiếc gối", emoji: "🛏️", category: "object", soundText: "Fluffy", aliases: ['pillow', 'gối'], cue: "Rest your sweet head!", bg: "#FEF3C7" },
+  { en: "Blanket", vi: "Chiếc chăn", emoji: "🛋️", category: "object", soundText: "Cozy warm", aliases: ['blanket', 'chăn', 'mền'], cue: "Warm bedtime cuddle!", bg: "#FEF3C7" },
+  { en: "Snow", vi: "Tuyết trắng", emoji: "❄️", category: "nature", soundText: "Chilly cool", aliases: ['snow', 'tuyết'], cue: "Cold falling flakes!", bg: "#FEF3C7" },
+  { en: "Wind", vi: "Gió mát", emoji: "💨", category: "nature", soundText: "Whoosh whoosh", aliases: ['wind', 'gió'], cue: "Blows leaves around!", bg: "#FEF3C7" },
+  { en: "Lightning", vi: "Sấm sét", emoji: "⚡", category: "nature", soundText: "Flash flash", aliases: ['lightning', 'sét', 'chớp'], cue: "Bright flash in rain!", bg: "#FEF3C7" },
+  { en: "Ocean", vi: "Đại dương", emoji: "🌊", category: "nature", soundText: "Wave crash", aliases: ['ocean', 'biển', 'đại dương'], cue: "Big blue waves!", bg: "#FEF3C7" },
+  { en: "Mountain", vi: "Ngọn núi", emoji: "⛰️", category: "nature", soundText: "Climb high", aliases: ['mountain', 'núi'], cue: "Reaches into clouds!", bg: "#FEF3C7" },
+  { en: "Leaf", vi: "Chiếc lá", emoji: "🍃", category: "nature", soundText: "Rustle", aliases: ['leaf', 'chiếc lá', 'lá'], cue: "Green fluttering leaf!", bg: "#FEF3C7" },
+  { en: "Grass", vi: "Bãi cỏ", emoji: "🌱", category: "nature", soundText: "Green lawn", aliases: ['grass', 'cỏ'], cue: "Soft green ground!", bg: "#FEF3C7" },
+  { en: "Fire", vi: "Ngọn lửa", emoji: "🔥", category: "nature", soundText: "Warm glow", aliases: ['fire', 'lửa'], cue: "Warm orange light!", bg: "#FEF3C7" },
+  { en: "Happy", vi: "Vui vẻ", emoji: "😊", category: "action", soundText: "Smile bright", aliases: ['happy', 'vui', 'vui vẻ'], cue: "Big happy smile!", bg: "#FEF3C7" },
+  { en: "Love", vi: "Yêu thương", emoji: "💖", category: "action", soundText: "Cuddle", aliases: ['love', 'yêu', 'thương'], cue: "Warm sweet hug!", bg: "#FEF3C7" },
+  { en: "Dance", vi: "Nhảy múa", emoji: "💃", category: "action", soundText: "Twirl twirl", aliases: ['dance', 'múa', 'nhảy múa'], cue: "Move to the music!", bg: "#FEF3C7" },
+  { en: "Sing", vi: "Ca hát", emoji: "🎤", category: "action", soundText: "La la la", aliases: ['sing', 'hát', 'ca hát'], cue: "Sing sweet melodies!", bg: "#FEF3C7" },
+  { en: "Laugh", vi: "Cười to", emoji: "😄", category: "action", soundText: "Ha ha ha", aliases: ['laugh', 'cười', 'haha'], cue: "Bubbly joyful laugh!", bg: "#FEF3C7" },
+];
+
+/* =====================================================================
+   I. THUẬT TOÁN CHỐNG LẶP TỪ TUYỆT ĐỐI (MAX-2 ANTI-REPEAT ENGINE)
+   ===================================================================== */
+const AntiRepeatEngine = {
+  tracker: {},
+  lastTurnMap: {},
+  currentTurn: 0,
+  history: [],
+
+  init() {
+    // Merge all words from 30 lessons into EXPANDED_VOCABULARY_POOL
+    if (typeof lessonsData !== 'undefined' && Array.isArray(lessonsData)) {
+      lessonsData.forEach(l => {
+        if (l.words) {
+          l.words.forEach(w => {
+            if (!EXPANDED_VOCABULARY_POOL.some(item => item.en.toLowerCase() === w.en.toLowerCase())) {
+              EXPANDED_VOCABULARY_POOL.push({
+                en: w.en,
+                vi: w.vi,
+                emoji: w.emoji,
+                category: "preschool",
+                soundText: w.soundText || w.en,
+                aliases: [w.en.toLowerCase(), w.vi.toLowerCase()],
+                cue: w.cue || w.en,
+                bg: w.bg || "#FEF3C7"
+              });
+            }
+          });
+        }
+      });
+    }
+    try {
+      const saved = sessionStorage.getItem('bemay_word_freq');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        this.tracker = parsed.tracker || {};
+        this.lastTurnMap = parsed.lastTurnMap || {};
+        this.currentTurn = parsed.currentTurn || 0;
+      }
+    } catch (e) {
+      this.tracker = {};
+      this.lastTurnMap = {};
+      this.currentTurn = 0;
+    }
+  },
+
+  save() {
+    try {
+      sessionStorage.setItem('bemay_word_freq', JSON.stringify({
+        tracker: this.tracker,
+        lastTurnMap: this.lastTurnMap,
+        currentTurn: this.currentTurn
+      }));
+    } catch (e) {}
+  },
+
+  resetIfAllMaxed(pool) {
+    const available = pool.filter(w => (this.tracker[w.en] || 0) < 2);
+    if (available.length === 0) {
+      this.tracker = {};
+      this.lastTurnMap = {};
+      this.save();
+    }
+  },
+
+  pickNextWord(pool, lastWordEn = null) {
+    this.resetIfAllMaxed(pool);
+    // Strict Rule: any word with count >= 2 is locked and excluded!
+    const validWords = pool.filter(w => {
+      const cnt = this.tracker[w.en] || 0;
+      if (cnt >= 2) return false;
+      if (lastWordEn && w.en === lastWordEn) return false;
+      return true;
+    });
+
+    if (validWords.length === 0) {
+      this.tracker = {};
+      this.save();
+      return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    // Priority 1: count === 0
+    const priority1 = validWords.filter(w => (this.tracker[w.en] || 0) === 0);
+    // Priority 2: count === 1 and lastTurn <= currentTurn - 5
+    const priority2 = validWords.filter(w => {
+      const cnt = this.tracker[w.en] || 0;
+      if (cnt !== 1) return false;
+      const lastTurn = this.lastTurnMap[w.en] || 0;
+      return (this.currentTurn - lastTurn) >= 5;
+    });
+    const fallback = validWords.filter(w => (this.tracker[w.en] || 0) === 1);
+
+    let candidates = priority1;
+    if (candidates.length === 0) candidates = priority2;
+    if (candidates.length === 0) candidates = fallback;
+    if (candidates.length === 0) candidates = validWords;
+
+    // Fisher-Yates shuffle
+    const shuffled = this.fisherYates(candidates);
+    const chosen = shuffled[0];
+
+    this.currentTurn++;
+    this.tracker[chosen.en] = (this.tracker[chosen.en] || 0) + 1;
+    this.lastTurnMap[chosen.en] = this.currentTurn;
+    this.history.push(chosen.en);
+    this.save();
+
+    return chosen;
+  },
+
+  fisherYates(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+};
+
+/* =====================================================================
+   II. BỘ MÁY TẠO MẪU HỎI ĐÁP VÔ HẠN (PROCEDURAL INFINITE Q&A ENGINE)
+   ===================================================================== */
+const DynamicPromptEngine = {
+  greetings: [
+    "Look, Bé Mây sees something!",
+    "Hey sweetie, look up here!",
+    "Magic mirror time!",
+    "Can you tell Bé Mây...",
+    "Ooh, what is floating here?",
+    "Listen carefully, little star!",
+    "Surprise, surprise! Look closely!",
+    "Bé Mây found a magic treasure!",
+    "Wow, look what just appeared!",
+    "Peek-a-boo! Guess what this is!",
+    "Can you help Bé Mây find this?",
+    "Are you ready, superstar?",
+    "Open your eyes big and bright!",
+    "Hello clever baby, look here!",
+    "Ding dong! Magic question time!"
+  ],
+
+  contextQuestions: {
+    animal: [
+      "What animal says [Sound]?",
+      "Who is jumping here? Is it [Word]?",
+      "Can you call the [Word]?",
+      "Look at this cute friend! Say [Word]!",
+      "Imitate the animal! Say [Word] or [Sound]!",
+      "Who has furry ears and a cute tail? It's a [Word]!",
+      "Can you roar or meow like this [Word]?"
+    ],
+    fruit: [
+      "Yummy! What do you want to eat? Is it [Word]?",
+      "What sweet fruit is this? It's [Word]!",
+      "Feed Bé Mây the yummy [Word]!",
+      "So delicious! Can you say [Word]?",
+      "What sweet treat is this? Say [Word]!",
+      "Munch munch! Say the word [Word]!"
+    ],
+    color: [
+      "What color is shining bright? It's [Word]!",
+      "Say the magic color: [Word]!",
+      "Look at the rainbow! Do you see [Word]?",
+      "Shine like a star! What color is this [Word]?",
+      "Point to the color and say [Word]!"
+    ],
+    vehicle: [
+      "Choo choo or vroom vroom! What goes fast? It's a [Word]!",
+      "Can you steer the [Word]?",
+      "Zoom zoom! Call the [Word] to go!",
+      "Ready, set, go! Say [Word]!",
+      "What vehicle is rolling on the road? A [Word]!"
+    ],
+    default: [
+      "Say the magic word to open the box: [Word]!",
+      "What is floating above your head? A [Word]!",
+      "Do you see this in your house? It's a [Word]!",
+      "Touch your nose and say [Word]!",
+      "Look at that lovely [Word]! Say it loud!",
+      "Wave your hands and shout [Word]!",
+      "Show Bé Mây your smile and say [Word]!"
+    ]
+  },
+
+  hints: [
+    "It starts with letter [FirstLetter]... Can you say [Word]?",
+    "Listen to Bé Mây: [Word]! Now your turn!",
+    "Say [Word] loud and clear!",
+    "Whisper [Word] like a little mouse!",
+    "Roar or shout [Word] like a lion!",
+    "Bé Mây is listening! Say [Word]!",
+    "You can do it! Just say [Word]!",
+    "Repeat after me: [Word]!",
+    "Is it [Word]? Tell Bé Mây: [Word]!",
+    "Let's say it together: [Word]!",
+    "One, two, three... say [Word]!",
+    "Bé Mây wants to hear [Word]!",
+    "Come on little superstar, say [Word]!",
+    "Speak to the microphone: [Word]!",
+    "Magic portal needs the word [Word]!"
+  ],
+
+  praises: [
+    "Bingo! You said [Word]!",
+    "Superstar! That's a [Word]!",
+    "Wow, your pronunciation is amazing!",
+    "Brilliant job! [Word] is correct!",
+    "High five! You nailed [Word]!",
+    "Awesome! You are so smart!",
+    "Hooray! The [Word] is super happy!",
+    "You got a golden star for [Word]!",
+    "Incredible reading! Say it again soon!",
+    "Perfect! You speak English so well!",
+    "Yay! That sounded wonderful!",
+    "Magic unlocked! Great job on [Word]!",
+    "Sweet baby! You said [Word] beautifully!",
+    "Fantastic energy! You got [Word]!",
+    "Ten out of ten! That's [Word]!",
+    "Good job! Bé Mây is proud of you!",
+    "Pop! Sparkling stars for saying [Word]!",
+    "Bullseye! Correct answer: [Word]!",
+    "Champion English speaker! [Word]!",
+    "You are rocking this! Next word is waiting!"
+  ],
+
+  generatePrompt(wordObj, gameMode) {
+    const greeting = this.greetings[Math.floor(Math.random() * this.greetings.length)];
+    const cat = wordObj.category || 'default';
+    const list = this.contextQuestions[cat] || this.contextQuestions.default;
+    let question = list[Math.floor(Math.random() * list.length)];
+
+    const sound = wordObj.soundText ? wordObj.soundText.split('!')[0] : 'Roar';
+    question = question.replace(/\[Word\]/g, wordObj.en)
+                       .replace(/\[Sound\]/g, sound)
+                       .replace(/\[FirstLetter\]/g, wordObj.en.charAt(0).toUpperCase());
+
+    return {
+      greeting,
+      question,
+      fullText: `${greeting} ${question}`,
+      vietnameseGuide: `Bé đọc từ "${wordObj.en}" (${wordObj.vi}) nhé!`
+    };
+  },
+
+  getHint(wordObj) {
+    const h = this.hints[Math.floor(Math.random() * this.hints.length)];
+    return h.replace(/\[Word\]/g, wordObj.en)
+            .replace(/\[FirstLetter\]/g, wordObj.en.charAt(0).toUpperCase());
+  },
+
+  getPraise(wordObj) {
+    const p = this.praises[Math.floor(Math.random() * this.praises.length)];
+    return p.replace(/\[Word\]/g, wordObj.en);
+  }
+};
+
+/* =====================================================================
+   III & IV. TRUNG TÂM TRÒ CHƠI AR & GIỌNG NÓI (AR & VOICE GAME HUB)
+   Tích hợp 5 AR Mini-Games + Web Speech API + AudioContext Volume Meter
+   ===================================================================== */
+const ARGameHub = {
+  activeMode: 'classic', // classic | bubble | mask | giftbox | rapid
+  currentWord: null,
+  currentIndex: 0,
+  maxWords: 10,
+  score: 0,
+  timeLeft: 60.0,
+  timerInterval: null,
+  hintInterval: null,
+  isRunning: false,
+  stream: null,
+  recognition: null,
+  analyser: null,
+  audioSource: null,
+  rafVolume: null,
+  comboStreak: 0,
+  startTime: 0,
+  particles: [],
+  canvas: null,
+  ctx: null,
+
+  init() {
+    AntiRepeatEngine.init();
+    this.canvas = document.getElementById('cam-ar-canvas');
+    if (this.canvas) {
+      this.ctx = this.canvas.getContext('2d');
+      this.resizeCanvas();
+      window.addEventListener('resize', () => this.resizeCanvas());
+    }
+    this.attachEventListeners();
+  },
+
+  resizeCanvas() {
+    if (!this.canvas) return;
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+  },
+
+  attachEventListeners() {
+    // Mode switcher buttons
+    document.querySelectorAll('.cam-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        playPop();
+        const mode = btn.dataset.camMode;
+        this.switchMode(mode);
+      });
+    });
+
+    // Home screen AR cards
+    document.querySelectorAll('.ar-mode-card').forEach(card => {
+      card.addEventListener('click', () => {
+        playPop();
+        const mode = card.dataset.mode || 'classic';
+        this.openHub(mode);
+      });
+    });
+
+    // Header & Home buttons
+    const btnCam = document.getElementById('btn-open-cam-global');
+    if (btnCam) btnCam.addEventListener('click', () => { playPop(); this.openHub('classic'); });
+
+    const btnQuick = document.getElementById('btn-quick-play-hub');
+    if (btnQuick) btnQuick.addEventListener('click', () => { playPop(); this.openHub('classic'); });
+
+    // In-modal buttons
+    const btnBack = document.getElementById('cam-back-btn');
+    if (btnBack) btnBack.addEventListener('click', () => { playPop(); this.closeHub(); });
+
+    const btnSettings = document.getElementById('cam-settings-btn');
+    if (btnSettings) btnSettings.addEventListener('click', () => { playPop(); openSettings(); });
+
+    const btnClassicSpeak = document.getElementById('cam-classic-speak');
+    if (btnClassicSpeak) btnClassicSpeak.addEventListener('click', () => {
+      playPop();
+      if (this.currentWord) speak(this.currentWord.en);
+    });
+
+    // Parent Quick Pass Button
+    const btnParentPass = document.getElementById('btn-parent-pass');
+    if (btnParentPass) btnParentPass.addEventListener('click', () => {
+      playPop();
+      this.onWordCorrect(true);
+    });
+
+    // Replay & Home in results modal
+    const btnReplay = document.getElementById('cam-btn-replay');
+    if (btnReplay) btnReplay.addEventListener('click', () => {
+      playPop();
+      document.getElementById('cam-results').classList.add('hidden');
+      this.startRound();
+    });
+
+    const btnHome = document.getElementById('cam-btn-home');
+    if (btnHome) btnHome.addEventListener('click', () => {
+      playPop();
+      this.closeHub();
+    });
+  },
+
+  async openHub(mode = 'classic') {
+    this.activeMode = mode;
+    const overlay = document.getElementById('cam-overlay');
+    if (overlay) overlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    await this.startCamera();
+    this.startMicrophoneAnalyser();
+    this.startSpeechRecognition();
+    this.switchMode(mode, false);
+    this.startRound();
+  },
+
+  closeHub() {
+    this.isRunning = false;
+    clearInterval(this.timerInterval);
+    clearInterval(this.hintInterval);
+    if (this.rafVolume) cancelAnimationFrame(this.rafVolume);
+
+    this.stopCamera();
+    this.stopSpeechRecognition();
+
+    const overlay = document.getElementById('cam-overlay');
+    if (overlay) overlay.classList.add('hidden');
+    document.getElementById('cam-results').classList.add('hidden');
+    document.body.style.overflow = '';
+  },
+
+  switchMode(mode, restart = true) {
+    this.activeMode = mode;
+    document.querySelectorAll('.cam-tab-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.camMode === mode);
+      b.classList.toggle('bg-white', b.dataset.camMode === mode);
+      b.classList.toggle('text-indigo-700', b.dataset.camMode === mode);
+      b.classList.toggle('border-indigo-400', b.dataset.camMode === mode);
+    });
+
+    const modeBadge = document.getElementById('cam-mode-badge');
+    const modeNames = {
+      classic: '👑 Thẻ Nổi',
+      bubble: '🫧 Bong Bóng',
+      mask: '🎭 Hóa Trang',
+      giftbox: '🎁 Hộp Quà',
+      rapid: '⚡ Phản Xạ'
+    };
+    if (modeBadge) modeBadge.textContent = modeNames[mode] || '👑 Thẻ Nổi';
+
+    document.querySelectorAll('.cam-game-stage').forEach(s => s.classList.add('hidden'));
+    const curStage = document.getElementById(`cam-stage-${mode}`);
+    if (curStage) curStage.classList.remove('hidden');
+
+    if (restart && this.isRunning) {
+      this.renderCurrentQuestion();
+    }
+  },
+
+  async startCamera() {
+    const video = document.getElementById('cam-video');
+    const fallback = document.getElementById('cam-fallback');
+    try {
+      const constraints = {
+        video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 } },
+        audio: false
+      };
+      this.stream = await navigator.mediaDevices.getUserMedia(constraints);
+      if (video) {
+        video.srcObject = this.stream;
+        video.classList.remove('hidden');
+      }
+      if (fallback) fallback.classList.add('hidden');
+    } catch (e) {
+      console.warn("Camera not available, activating animated sky fallback", e);
+      if (video) video.classList.add('hidden');
+      if (fallback) fallback.classList.remove('hidden');
+    }
+  },
+
+  stopCamera() {
+    if (this.stream) {
+      try {
+        this.stream.getTracks().forEach(t => t.stop());
+      } catch (e) {}
+      this.stream = null;
+    }
+  },
+
+  startMicrophoneAnalyser() {
+    try {
+      const actx = getAudioCtx();
+      if (!actx) return;
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(mStream => {
+        this.analyser = actx.createAnalyser();
+        this.analyser.fftSize = 64;
+        this.audioSource = actx.createMediaStreamSource(mStream);
+        this.audioSource.connect(this.analyser);
+        this.animateEnergyBar();
+      }).catch(err => {
+        console.warn("Microphone stream not permitted for visualizer", err);
+      });
+    } catch (e) {}
+  },
+
+  animateEnergyBar() {
+    if (!this.analyser) return;
+    const dataArray = new Uint8Array(this.analyser.frequencyBinCount);
+    const update = () => {
+      if (!this.isRunning) return;
+      this.analyser.getByteFrequencyData(dataArray);
+      let sum = 0;
+      for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
+      const avg = sum / dataArray.length;
+      const pct = Math.min(100, Math.max(10, (avg / 128) * 100));
+
+      const cols = document.querySelectorAll('#voice-energy-bar .ve-col');
+      cols.forEach((col, idx) => {
+        const factor = 0.5 + Math.sin(idx + Date.now() * 0.01) * 0.4;
+        const h = Math.min(100, Math.max(12, pct * factor));
+        col.style.height = h + '%';
+      });
+
+      this.rafVolume = requestAnimationFrame(update);
+    };
+    this.rafVolume = requestAnimationFrame(update);
+  },
+
+  startSpeechRecognition() {
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRec) {
+      this.updateSpeechToast("🎤 Trình duyệt hỗ trợ chạm nút Bố Mẹ để xác nhận");
+      return;
+    }
+    try {
+      this.recognition = new SpeechRec();
+      this.recognition.continuous = true;
+      this.recognition.interimResults = true;
+      this.recognition.lang = 'en-US';
+
+      this.recognition.onresult = (e) => {
+        let transcript = '';
+        for (let i = e.resultIndex; i < e.results.length; ++i) {
+          transcript += e.results[i][0].transcript;
+        }
+        transcript = transcript.trim().toLowerCase();
+        if (transcript) {
+          this.updateSpeechToast(`🗣️ Bé vừa đọc: "${transcript}"`);
+          this.checkSpokenAnswer(transcript);
+        }
+      };
+
+      this.recognition.onerror = (e) => {
+        if (e.error === 'not-allowed') {
+          this.updateSpeechToast("⚠️ Hãy cho phép quyền Micro để Bé Mây nghe bé nhé!");
+        }
+      };
+
+      this.recognition.onend = () => {
+        if (this.isRunning) {
+          try { this.recognition.start(); } catch (err) {}
+        }
+      };
+
+      this.recognition.start();
+    } catch (e) {}
+  },
+
+  stopSpeechRecognition() {
+    if (this.recognition) {
+      try { this.recognition.stop(); } catch (e) {}
+      this.recognition = null;
+    }
+  },
+
+  updateSpeechToast(msg) {
+    const toast = document.getElementById('cam-speech-toast-text');
+    if (toast) toast.textContent = msg;
+  },
+
+  startRound() {
+    this.currentIndex = 0;
+    this.score = 0;
+    this.timeLeft = 60.0;
+    this.comboStreak = 0;
+    this.startTime = Date.now();
+    this.isRunning = true;
+
+    this.updateProgressUI();
+    this.startTimer();
+    this.nextQuestion();
+  },
+
+  startTimer() {
+    clearInterval(this.timerInterval);
+    const clockEl = document.getElementById('cam-digital-timer');
+    this.timerInterval = setInterval(() => {
+      this.timeLeft -= 0.1;
+      if (this.timeLeft <= 0) {
+        this.timeLeft = 0;
+        clearInterval(this.timerInterval);
+        this.finishRound();
+      }
+      if (clockEl) clockEl.textContent = this.timeLeft.toFixed(2) + 's';
+    }, 100);
+  },
+
+  nextQuestion() {
+    if (this.currentIndex >= this.maxWords) {
+      this.finishRound();
+      return;
+    }
+    this.currentIndex++;
+    this.updateProgressUI();
+
+    // Max-2 Anti-Repeat Engine selects word from 150+ pool
+    const lastEn = this.currentWord ? this.currentWord.en : null;
+    this.currentWord = AntiRepeatEngine.pickNextWord(EXPANDED_VOCABULARY_POOL, lastEn);
+
+    this.renderCurrentQuestion();
+    this.startHintRotator();
+  },
+
+  startHintRotator() {
+    clearInterval(this.hintInterval);
+    const hintEl = document.getElementById('cam-dynamic-hint');
+    this.hintInterval = setInterval(() => {
+      if (!this.isRunning || !this.currentWord) return;
+      const hint = DynamicPromptEngine.getHint(this.currentWord);
+      if (hintEl) hintEl.textContent = '💡 ' + hint;
+    }, 5000);
+  },
+
+  renderCurrentQuestion() {
+    const w = this.currentWord;
+    if (!w) return;
+
+    // Procedural Prompt
+    const prompt = DynamicPromptEngine.generatePrompt(w, this.activeMode);
+    const hintEl = document.getElementById('cam-dynamic-hint');
+    if (hintEl) hintEl.textContent = '💡 ' + prompt.vietnameseGuide;
+
+    // 1. Classic Mode
+    const cEmoji = document.getElementById('cam-classic-emoji');
+    const cEn = document.getElementById('cam-classic-en');
+    const cVi = document.getElementById('cam-classic-vi');
+    if (cEmoji) cEmoji.textContent = w.emoji;
+    if (cEn) cEn.textContent = w.en;
+    if (cVi) cVi.textContent = w.vi;
+
+    // 2. Bubble Mode
+    const bEmoji = document.getElementById('cam-bubble-emoji');
+    const bEn = document.getElementById('cam-bubble-en');
+    if (bEmoji) bEmoji.textContent = w.emoji;
+    if (bEn) bEn.textContent = w.en;
+
+    // 3. Mask Mode
+    const mEmoji = document.getElementById('cam-mask-emoji');
+    const mEn = document.getElementById('cam-mask-en');
+    const mHint = document.getElementById('cam-mask-hint');
+    if (mEmoji) mEmoji.textContent = w.emoji;
+    if (mEn) mEn.textContent = w.en;
+    if (mHint) mHint.textContent = `🗣️ Nói "${w.en}" hoặc kêu "${w.soundText}"`;
+
+    // 4. Giftbox Mode
+    const gEn = document.getElementById('cam-gift-en');
+    const gBox = document.getElementById('cam-gift-box');
+    const gEmoji = document.getElementById('cam-gift-emoji');
+    if (gEn) gEn.textContent = w.en;
+    if (gEmoji) gEmoji.textContent = "🎁";
+    if (gBox) {
+      gBox.classList.remove('scale-110', 'rotate-12');
+      animate(gBox, 'shake');
+    }
+
+    // 5. Rapid Mode
+    const rQ = document.getElementById('cam-rapid-question');
+    const rG = document.getElementById('cam-rapid-guide');
+    const rEmoji = document.getElementById('cam-rapid-emoji');
+    const rEn = document.getElementById('cam-rapid-en');
+    const rVi = document.getElementById('cam-rapid-vi');
+    const rStreak = document.getElementById('cam-rapid-streak');
+    if (rQ) rQ.textContent = prompt.question;
+    if (rG) rG.textContent = `Bé trả lời: "${w.en}"`;
+    if (rEmoji) rEmoji.textContent = w.emoji;
+    if (rEn) rEn.textContent = w.en;
+    if (rVi) rVi.textContent = w.vi;
+    if (rStreak) rStreak.textContent = `⚡ Streak: x${this.comboStreak}`;
+
+    // Read question or prompt initially
+    if (this.activeMode === 'rapid') {
+      speak(prompt.question);
+    } else {
+      speak(w.en);
+    }
+  },
+
+  checkSpokenAnswer(text) {
+    if (!this.currentWord || !this.isRunning) return;
+    const w = this.currentWord;
+    const targetEn = w.en.toLowerCase();
+    const targetVi = w.vi.toLowerCase();
+    const targetSound = w.soundText ? w.soundText.toLowerCase() : '';
+    const aliases = w.aliases || [];
+
+    const isMatch = text.includes(targetEn) ||
+                    text.includes(targetVi) ||
+                    (targetSound && text.includes(targetSound)) ||
+                    aliases.some(a => text.includes(a.toLowerCase())) ||
+                    this.fuzzyMatch(text, targetEn);
+
+    if (isMatch) {
+      this.onWordCorrect(false);
+    }
+  },
+
+  fuzzyMatch(input, target) {
+    if (input.length < 2 || target.length < 2) return false;
+    if (input.startsWith(target.slice(0, 2))) return true;
+    if (input.endsWith(target.slice(-2))) return true;
+    return false;
+  },
+
+  onWordCorrect(isParentPass = false) {
+    if (!this.isRunning) return;
+    this.score++;
+    this.comboStreak++;
+    addStars(1);
+
+    // Audio & Visual celebratory feedback
+    playPop();
+    playFanfareAndClap();
+    showConfetti('light');
+
+    const praise = DynamicPromptEngine.getPraise(this.currentWord);
+    this.updateSpeechToast(`✅ ${isParentPass ? 'Bố Mẹ duyệt: ' : ''}${this.currentWord.en} - ${praise}`);
+
+    if (this.activeMode === 'giftbox') {
+      const gBox = document.getElementById('cam-gift-box');
+      const gEmoji = document.getElementById('cam-gift-emoji');
+      if (gEmoji) gEmoji.textContent = this.currentWord.emoji;
+      if (gBox) gBox.classList.add('scale-110');
+    }
+
+    setTimeout(() => {
+      if (this.isRunning) {
+        this.nextQuestion();
+      }
+    }, 1100);
+  },
+
+  updateProgressUI() {
+    const coin = document.getElementById('cam-coin-badge');
+    const bar = document.getElementById('cam-progress-bar');
+    const curEl = document.getElementById('cam-cur-step');
+
+    if (coin) coin.textContent = Math.min(this.maxWords, this.currentIndex);
+    if (curEl) curEl.textContent = Math.min(this.maxWords, this.currentIndex);
+    if (bar) {
+      const pct = (Math.min(this.maxWords, this.currentIndex) / this.maxWords) * 100;
+      bar.style.width = pct + '%';
+    }
+  },
+
+  finishRound() {
+    this.isRunning = false;
+    clearInterval(this.timerInterval);
+    clearInterval(this.hintInterval);
+
+    playFanfareAndClap();
+    showConfetti('full');
+    addStars(3);
+
+    const elapsed = ((Date.now() - this.startTime) / 1000).toFixed(1);
+    const resScore = document.getElementById('cam-res-score');
+    const resTime = document.getElementById('cam-res-time');
+    const resMsg = document.getElementById('cam-results-msg');
+
+    if (resScore) resScore.textContent = `${this.score}/${this.maxWords}`;
+    if (resTime) resTime.textContent = elapsed + 's';
+    if (resMsg) {
+      resMsg.textContent = this.score >= 8 ?
+        "🌟 Bé là siêu sao tiếng Anh của Bé Mây!" :
+        "👏 Bé chơi rất cố gắng! Bé Mây khen ngợi bé!";
+    }
+
+    document.getElementById('cam-results').classList.remove('hidden');
+    speak(this.score >= 8 ? "Awesome! You are a superstar!" : "Good job! You are so clever!");
+  }
+};
+
 function init() {
   OTAEngine.loadCachedBundle();
+  ARGameHub.init();
   loadState();
   initVoices();
   if (hasTTS) {

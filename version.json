@@ -1,9 +1,9 @@
 {
-  "version": "1.4.0",
-  "otaVersion": "1.4.0",
+  "version": "1.5.0",
+  "otaVersion": "1.5.0",
   "allowUpdate": true,
-  "title": "Bé Mây English v1.4.0",
-  "notes": "✨ Phiên bản v1.4.0: Đã xóa hoàn toàn các trò camera AR theo yêu cầu; tinh gọn lộ trình 4 bước học trực quan; mục Thẻ Từ phát âm tiếng Anh chuẩn xác đúng 1 lần duy nhất khi bé chạm vào thẻ!",
+  "title": "Bé Mây English v1.5.0 - AR & Voice Game Hub",
+  "notes": "✨ Phiên bản v1.5.0: Nâng cấp Trung Tâm Trò Chơi AR Đa Năng với 5 chế độ chơi chuẩn (Thẻ nổi 60s, Bong bóng bay, Hóa trang & Giả tiếng thú, Hộp quà bí mật, Phản xạ thần tốc), Thuật toán chống lặp Max-2 với 150+ từ vựng, Bộ máy tạo câu hỏi vô hạn và Cột sóng âm thanh Micro nhấp nháy!",
   "bundleUrl": "https://raw.githubusercontent.com/haitruongproqt1-a11y/be-may-english/main/patch.js",
-  "updatedAt": "2026-10-28T21:30:00Z"
+  "updatedAt": "2026-10-28T22:10:00Z"
 }
